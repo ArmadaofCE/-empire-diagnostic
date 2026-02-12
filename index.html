@@ -490,6 +490,7 @@ const primaryLeak = C[w[0]].name;
 const secondaryLeak = s2 ? C[s2[0]].name : 'N/A';
 
 // Build detailed answer log for Airtable Assessment Notes
+const ab = ov >= bm.a;
 const answerLog = ans.map(a => {
   const q = Q[a.qi];
   return `[${C[q.c].name}] Q: ${q.q}\nA: ${q.o[a.oi].t} (Score: ${a.s}/100)`;
@@ -537,7 +538,7 @@ sendToConvertKit(uD.email, uD.name, [phaseTag, `rev-${uD.rev}`, `leak-${w[0]}`])
 
 // Build Calendly URL with pre-filled context
 const calUrl = getCalendlyUrl(uD.name, uD.email, ov, primaryLeak);
-const sz=180,sw=2.5,r=(sz-sw*2)/2,ci=2*Math.PI*r,ab=ov>=bm.a;
+const sz=180,sw=2.5,r=(sz-sw*2)/2,ci=2*Math.PI*r;
 
 el.innerHTML=`
 <div class="rv" data-s="1" style="text-align:center;margin-bottom:4px"><div style="font:700 7px/1 'Orbitron',sans-serif;letter-spacing:4px;color:var(--w5)">◇ CLASSIFIED REPORT ◇</div></div>
