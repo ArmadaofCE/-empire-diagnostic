@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Empire Operating Score — Creator Empire Diagnostic</title>
+<meta name="description" content="The 3-minute intelligence scan that reveals exactly where your creator business is leaking revenue. Free operational diagnostic for creators earning $10K-$150K/month.">
+<meta name="author" content="Creator Empire Diagnostic">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://creatorempirediagnostic.com">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://creatorempirediagnostic.com">
+<meta property="og:title" content="Empire Operating Score — Find Your Biggest Revenue Leak">
+<meta property="og:description" content="10-question classified diagnostic for creators earning $10K-$150K/month. Discover which operational leak is costing you the most.">
+<meta property="og:image" content="https://creatorempirediagnostic.com/og-image.png">
+<meta property="og:site_name" content="Creator Empire Diagnostic">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Empire Operating Score — Find Your Biggest Revenue Leak">
+<meta name="twitter:description" content="10-question classified diagnostic for creators earning $10K-$150K/month.">
+<meta name="twitter:image" content="https://creatorempirediagnostic.com/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230c0c0c'/><text x='50' y='68' text-anchor='middle' fill='%2300e87b' font-family='sans-serif' font-weight='700' font-size='56'>E</text></svg>">
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#0c0c0c">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Sora:wght@200;300;400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0c0c0c;--bg2:#111;--bg3:#161616;
+--w:#ffffff;--w2:#e8e8e8;--w3:#c0c0c0;--w4:#888;--w5:#555;--w6:#333;--w7:#222;
+--grn:#00e87b;--grn2:#00ff88;--grn-g:rgba(0,232,123,.08);--grn-b:rgba(0,232,123,.2);
+--red:#ff3b4e;--red-g:rgba(255,59,78,.06);--red-b:rgba(255,59,78,.18);
+--amb:#ffb020;--amb-g:rgba(255,176,32,.05);
+--pbg:rgba(255,255,255,.015);--pbdr:rgba(255,255,255,.06);
+}
+::selection{background:rgba(0,232,123,.15);color:#fff}
+body{background:var(--bg);color:var(--w2);font-family:'Sora',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+
+/* ═══ UNLOCK ═══ */
+#unlock{position:fixed;inset:0;z-index:1000;background:#080808;display:flex;align-items:center;justify-content:center;flex-direction:column;cursor:default}
+#unlock.out{animation:unlockOut 1.2s cubic-bezier(.23,1,.32,1) forwards}
+#u-canvas{position:absolute;inset:0;z-index:0}
+#u-ui{position:relative;z-index:1;text-align:center;width:100%;max-width:420px;padding:0 24px}
+
+.lock-row{display:flex;justify-content:center;gap:5px;margin-bottom:40px}
+.dial{width:48px;height:62px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font:700 26px/1 'Orbitron',sans-serif;color:rgba(255,255,255,.08);transition:all .5s cubic-bezier(.23,1,.32,1)}
+.dial.spin{animation:dSpin .1s ease}
+.dial.set{color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.04);text-shadow:0 0 25px rgba(255,255,255,.2)}
+.dial.set-grn{color:var(--grn);border-color:var(--grn-b);background:var(--grn-g);text-shadow:0 0 25px rgba(0,232,123,.3)}
+
+.fp{width:120px;height:120px;margin:0 auto 36px;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fp svg{width:100%;height:100%}
+.fp-trk{fill:none;stroke:rgba(255,255,255,.06);stroke-width:1.5}
+.fp-fl{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1.5s cubic-bezier(.23,1,.32,1)}
+.fp.active .fp-fl{stroke-dashoffset:0}
+.fp .inner{position:absolute;inset:22px;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.fp .ico{width:32px;height:32px;border:1.5px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .6s}
+.fp .ico::after{content:'';width:10px;height:10px;border:1.5px solid rgba(255,255,255,.2);border-radius:50%;transition:all .6s}
+.fp.active .ico{border-color:rgba(255,255,255,.5);animation:fpPulse 1s ease infinite}
+.fp.active .ico::after{border-color:rgba(255,255,255,.6)}
+.fp.done .ico{border-color:var(--grn);box-shadow:0 0 20px rgba(0,232,123,.15)}
+.fp.done .ico::after{background:var(--grn);border-color:var(--grn)}
+.fp.done .fp-fl{stroke:var(--grn);filter:drop-shadow(0 0 10px rgba(0,232,123,.3))}
+.fp .st{font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:3.5px;color:rgba(255,255,255,.2);margin-top:6px;transition:all .5s}
+.fp.active .st{color:rgba(255,255,255,.5)}
+.fp.done .st{color:var(--grn)}
+
+.sbar-u{width:100%;height:1px;background:rgba(255,255,255,.04);margin-bottom:28px;position:relative;overflow:hidden;opacity:0;transition:opacity .4s}
+.sbar-u.active{opacity:1}
+.sbar-u::after{content:'';position:absolute;width:25%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:sweepH 1.6s linear infinite}
+
+.u-lbl{font:600 7.5px/1 'JetBrains Mono',monospace;letter-spacing:6px;color:rgba(255,255,255,.18);text-transform:uppercase;margin-bottom:10px}
+.u-ttl{font:200 32px/1.1 'Sora',sans-serif;color:rgba(255,255,255,.08);margin-bottom:36px;letter-spacing:.5px}
+.u-msg{font:400 11.5px/1.6 'JetBrains Mono',monospace;color:rgba(255,255,255,.2);letter-spacing:.4px;min-height:18px;transition:all .4s}
+.u-msg.g{color:var(--grn);text-shadow:0 0 15px rgba(0,232,123,.15)}
+
+/* ═══ BG ═══ */
+#bg-c{position:fixed;inset:0;z-index:0;pointer-events:none}
+.ov-scan{position:fixed;left:0;right:0;height:1px;z-index:2;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.015),rgba(255,255,255,.03),rgba(255,255,255,.015),transparent);animation:scanY 8s linear infinite}
+.ov-vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 30%,rgba(12,12,12,.95) 100%)}
+.ov-noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.018;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.crnr{position:fixed;z-index:5;pointer-events:none;width:30px;height:30px;opacity:0;transition:opacity 1s}
+.crnr.v{opacity:1}
+.crnr-tl{top:8px;left:8px;border-top:1px solid rgba(255,255,255,.04);border-left:1px solid rgba(255,255,255,.04)}
+.crnr-tr{top:8px;right:8px;border-top:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.04)}
+.crnr-bl{bottom:24px;left:8px;border-bottom:1px solid rgba(255,255,255,.04);border-left:1px solid rgba(255,255,255,.04)}
+.crnr-br{bottom:24px;right:8px;border-bottom:1px solid rgba(255,255,255,.04);border-right:1px solid rgba(255,255,255,.04)}
+
+.sbar{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:6px 14px;display:flex;justify-content:space-between;font:400 6.5px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:rgba(255,255,255,.08);text-transform:uppercase;pointer-events:none;background:linear-gradient(transparent,rgba(12,12,12,.95));opacity:0;transition:opacity 1s}
+.sbar.v{opacity:1}
+.sbar .dt{width:3px;height:3px;border-radius:50%;background:var(--grn);animation:pulse 2.5s ease infinite;margin-right:4px;display:inline-block;vertical-align:middle}
+
+/* ═══ APP ═══ */
+#app{max-width:580px;margin:0 auto;padding:48px 18px 100px;position:relative;z-index:10;opacity:0;transform:translateY(12px);transition:all 1.2s cubic-bezier(.23,1,.32,1)}
+#app.vis{opacity:1;transform:none}
+
+/* Panels */
+.p{position:relative;padding:24px;background:var(--pbg);border:1px solid var(--pbdr);transition:all .35s;overflow:hidden}
+.p::before,.p::after{content:'';position:absolute;width:10px;height:10px;border-style:solid}
+.p::before{top:-1px;left:-1px;border-width:1px 0 0 1px;border-color:rgba(255,255,255,.15)}
+.p::after{top:-1px;right:-1px;border-width:1px 1px 0 0;border-color:rgba(255,255,255,.15)}
+.p .cb{position:absolute;width:10px;height:10px;border-style:solid;bottom:-1px;left:-1px;border-width:0 0 1px 1px;border-color:rgba(255,255,255,.15)}
+.p .cb2{position:absolute;width:10px;height:10px;border-style:solid;bottom:-1px;right:-1px;border-width:0 1px 1px 0;border-color:rgba(255,255,255,.15)}
+/* Shimmer */
+.p .shim{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.01),transparent);pointer-events:none}
+.p:hover .shim{animation:shimmer 1.2s ease}
+.p:hover{border-color:rgba(255,255,255,.1)}
+.p-r{border-color:var(--red-b);background:var(--red-g)}
+.p-r::before,.p-r::after,.p-r .cb,.p-r .cb2{border-color:rgba(255,59,78,.35)!important}
+.p-g{border-color:var(--grn-b);background:var(--grn-g)}
+.p-g::before,.p-g::after,.p-g .cb,.p-g .cb2{border-color:rgba(0,232,123,.35)!important}
+
+.lb{font:600 7.5px/1 'JetBrains Mono',monospace;letter-spacing:3.5px;color:var(--w4);margin-bottom:14px;text-transform:uppercase}
+.lb::before{content:'// ';color:var(--w5)}
+.lb-r{color:var(--red)}.lb-r::before{color:rgba(255,59,78,.4)}
+.lb-g{color:var(--grn)}.lb-g::before{color:rgba(0,232,123,.4)}
+
+.sep{display:flex;align-items:center;gap:8px;margin:28px 0}
+.sep .l{flex:1;height:1px;background:rgba(255,255,255,.04)}
+.sep .d{width:3px;height:3px;background:var(--grn);transform:rotate(45deg);box-shadow:0 0 6px rgba(0,232,123,.2)}
+
+/* Inputs */
+.inp{padding:14px 15px;width:100%;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);color:#fff;font:400 12px/1.3 'JetBrains Mono',monospace;letter-spacing:.3px;outline:none;transition:all .3s}
+.inp:focus{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.04);box-shadow:0 0 0 3px rgba(255,255,255,.02)}
+.inp::placeholder{color:var(--w5)}
+select.inp{appearance:none;cursor:pointer}
+select option{background:var(--bg2);color:#fff}
+
+.btn{padding:15px;width:100%;margin-top:6px;background:var(--grn);color:#000;border:none;font:700 9px/1 'Orbitron',sans-serif;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .5s}
+.btn:hover{box-shadow:0 0 35px rgba(0,232,123,.15),0 4px 20px rgba(0,0,0,.3)}
+.btn:hover::after{left:100%}
+.btn:disabled{background:var(--w6);color:var(--w5);cursor:not-allowed;box-shadow:none}
+.btn:disabled::after{display:none}
+
+.btn-w{background:transparent;border:1px solid var(--grn);color:var(--grn)}
+.btn-w:hover{background:var(--grn);color:#000}
+
+/* Quiz */
+.qp{display:flex;gap:2px;justify-content:center;margin-bottom:30px}
+.qp-s{height:2px;flex:1;max-width:30px;background:rgba(255,255,255,.04);transition:all .4s}
+.qp-s.dn{background:var(--grn);box-shadow:0 0 4px rgba(0,232,123,.2)}
+.qp-s.nw{background:var(--grn);animation:sp 1.5s ease infinite}
+
+.qc{animation:tIn .45s cubic-bezier(.23,1,.32,1) forwards}
+.qc.out{animation:tOut .3s cubic-bezier(.23,1,.32,1) forwards}
+.or{opacity:0;transform:translateY(8px);animation:oIn .3s cubic-bezier(.23,1,.32,1) forwards}
+.or:nth-child(1){animation-delay:.08s}.or:nth-child(2){animation-delay:.16s}
+.or:nth-child(3){animation-delay:.24s}.or:nth-child(4){animation-delay:.32s}
+
+.opt{padding:15px 17px;cursor:pointer;position:relative;background:rgba(255,255,255,.01);border:1px solid rgba(255,255,255,.04);transition:all .25s;overflow:hidden}
+.opt::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:all .25s}
+.opt .oshim{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.02),transparent);pointer-events:none}
+.opt:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.1);transform:translateX(3px)}
+.opt:hover::before{background:#fff}
+.opt:hover .oshim{animation:shimmer .8s ease}
+.opt.sel{background:var(--grn-g);border-color:var(--grn-b)}
+.opt.sel::before{background:var(--grn);box-shadow:0 0 8px rgba(0,232,123,.2)}
+.opt.sel p{color:var(--grn)!important;font-weight:500!important}
+.opt.dim{opacity:.04!important;transform:none!important}
+
+/* Results */
+.rv{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.23,1,.32,1)}
+.rv.v{opacity:1;transform:none}
+.cr{opacity:0;transform:translateX(20px);transition:all .45s cubic-bezier(.23,1,.32,1)}
+.cr.v{opacity:1;transform:none}
+.bf{width:0;transition:width 1.2s cubic-bezier(.23,1,.32,1)}
+.srf{transition:stroke-dashoffset 2s cubic-bezier(.23,1,.32,1)}
+
+/* Typing effect */
+.type{overflow:hidden;white-space:nowrap;border-right:2px solid var(--grn);animation:typeW 2s steps(30) forwards,blink .6s step-end infinite}
+@keyframes typeW{from{width:0}to{width:100%}}
+@keyframes blink{50%{border-color:transparent}}
+
+@keyframes scanY{0%{top:-2px}100%{top:100vh}}
+@keyframes sp{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes tIn{from{opacity:0;transform:translateY(14px);filter:blur(1px)}to{opacity:1;transform:none;filter:none}}
+@keyframes tOut{from{opacity:1}to{opacity:0;transform:translateY(-14px);filter:blur(1px)}}
+@keyframes oIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:.1}50%{opacity:.8}}
+@keyframes sweepH{from{left:-25%}to{left:100%}}
+@keyframes dSpin{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+@keyframes shimmer{from{left:-60%}to{left:120%}}
+@keyframes fpPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:0 0 0 8px rgba(255,255,255,.04)}}
+@keyframes unlockOut{0%{opacity:1;filter:none}40%{opacity:1;filter:brightness(1.5)}100%{opacity:0;filter:brightness(2);pointer-events:none}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(0,232,123,.08)}50%{box-shadow:0 0 35px rgba(0,232,123,.15)}}
+</style>
+</head>
+<body>
+
+<!-- ═══ UNLOCK ═══ -->
+<div id="unlock">
+  <canvas id="u-canvas"></canvas>
+  <div id="u-ui">
+    <div class="u-lbl">Empire Operating System</div>
+    <div class="u-ttl">Classified Diagnostic</div>
+    <div class="lock-row" id="dials">
+      <div class="dial">—</div><div class="dial">—</div><div class="dial">—</div>
+      <div class="dial">—</div><div class="dial">—</div><div class="dial">—</div>
+    </div>
+    <div class="fp" id="fp" onclick="startAuth()">
+      <svg viewBox="0 0 100 100"><circle class="fp-trk" cx="50" cy="50" r="45"/><circle class="fp-fl" cx="50" cy="50" r="45" transform="rotate(-90 50 50)"/></svg>
+      <div class="inner"><div class="ico"></div><div class="st">AUTHENTICATE</div></div>
+    </div>
+    <div class="sbar-u" id="sbar-u"></div>
+    <div class="u-msg" id="u-msg">Tap to initiate biometric verification</div>
+  </div>
+</div>
+
+<!-- BG -->
+<canvas id="bg-c"></canvas>
+<div class="ov-scan"></div><div class="ov-vig"></div><div class="ov-noise"></div>
+<div class="crnr crnr-tl"></div><div class="crnr crnr-tr"></div><div class="crnr crnr-bl"></div><div class="crnr crnr-br"></div>
+<div class="sbar"><span><span class="dt"></span>EOS v4.7</span><span>EXECUTIVE CLEARANCE</span><span id="clk"></span></div>
+
+<div id="app">
+  <div id="s-intro"></div>
+  <div id="s-quiz" style="display:none"></div>
+  <div id="s-results" style="display:none"></div>
+</div>
+
+<script>
+const C={content:{name:"Content Operations",broken:"Artist Model",correct:"Factory Model",brokenDesc:"waiting for inspiration, inconsistent output",correctDesc:"batch production, 2+ week content buffer"},revenue:{name:"Revenue Operations",broken:"Hope-Based Model",correct:"Math-Based Model",brokenDesc:"winging it, reactive pricing",correctDesc:"data-driven decisions, tracked metrics"},audience:{name:"Audience Acquisition",broken:"Spray & Pray",correct:"Targeted Acquisition",brokenDesc:"posting everywhere, no funnel",correctDesc:"platform focus, lead magnets, conversion path"},team:{name:"Team & Delegation",broken:"Freelancer Model",correct:"CEO Model",brokenDesc:"doing everything yourself",correctDesc:"clear roles, documented SOPs"},intelligence:{name:"Business Intelligence",broken:"Gut Feel Model",correct:"Data-Driven Model",brokenDesc:"no metrics, reactive",correctDesc:"weekly scorecard, OKRs"},ceo:{name:"CEO Rhythm",broken:"Reactive Model",correct:"Proactive Model",brokenDesc:"firefighting, no planning",correctDesc:"recurring meetings, quarterly planning"}};
+const Q=[{c:"content",q:"How would you describe your content creation process?",o:[{t:"I post when inspiration hits — no real schedule",s:15},{t:"I try to be consistent but fall off regularly",s:40},{t:"I batch create with an editorial calendar",s:70},{t:"Full production pipeline with 2+ weeks buffer",s:95}]},{c:"content",q:"Do you have documented SOPs for content creation?",o:[{t:"No — it's all in my head",s:10},{t:"Partial notes, nothing someone else could follow",s:35},{t:"Yes — someone could replicate my process from the docs",s:80},{t:"Fully documented and delegated to a team member",s:100}]},{c:"revenue",q:"How do you make your biggest money decisions?",o:[{t:"Intuition — 'this feels right'",s:15},{t:"Some data, but mostly gut feel",s:40},{t:"I track key metrics and use data for most decisions",s:75},{t:"Completely math-based — I know my CAC, LTV, and margins cold",s:100}]},{c:"revenue",q:"What percentage of your revenue is recurring or predictable?",o:[{t:"0–25% — mostly one-time or launch-based",s:20},{t:"26–50% — some recurring but unpredictable",s:45},{t:"51–75% — majority recurring",s:75},{t:"76–100% — highly predictable month over month",s:100}]},{c:"audience",q:"How would you describe your audience growth strategy?",o:[{t:"Post and pray — no real strategy",s:10},{t:"Active on multiple platforms but spreading thin",s:30},{t:"Focused on 1–2 platforms with a lead magnet and email list",s:70},{t:"Full funnel — platform → lead magnet → nurture → convert",s:95}]},{c:"team",q:"How many hours per week do YOU spend on admin and operations?",o:[{t:"31–40+ hours — I basically am the business",s:10},{t:"21–30 hours — doing most things myself",s:30},{t:"11–20 hours — I have help but I'm still the bottleneck",s:60},{t:"0–10 hours — my team handles it",s:95}]},{c:"team",q:"Does your team have clearly documented roles and responsibilities?",o:[{t:"No team or no documentation at all",s:10},{t:"I have help but they always have to ask me what to do",s:30},{t:"Partial documentation — some things are covered",s:60},{t:"Fully documented — my team operates independently",s:95}]},{c:"intelligence",q:"Do you track key business metrics on a weekly basis?",o:[{t:"No — honestly not sure what my numbers are",s:10},{t:"I check revenue occasionally",s:30},{t:"I track revenue and a few other metrics monthly",s:55},{t:"Weekly scorecard with 5–10 KPIs I review religiously",s:95}]},{c:"ceo",q:"How do you plan your weeks, months, and quarters?",o:[{t:"I don't — I react to whatever's most urgent",s:10},{t:"Loose weekly plan that I rarely follow through on",s:30},{t:"Solid weekly rhythm but no quarterly planning",s:60},{t:"Weekly rhythm + quarterly rocks + annual vision — all connected",s:95}]},{c:"ceo",q:"When an unexpected problem hits your business, what happens?",o:[{t:"I drop everything and firefight until it's solved",s:10},{t:"I stress about it and handle it reactively",s:30},{t:"I log it and address it in my next planning session",s:70},{t:"My team flags it, we do root cause analysis, and build a system to prevent it",s:95}]}];
+const BM={"10-30k":{a:38,t:62},"30-50k":{a:47,t:71},"50-100k":{a:56,t:78},"100-150k":{a:64,t:85},"150k+":{a:72,t:91}};
+function gP(s){return s<=40?{l:"FOUNDATION",c:"#ff3b4e",d:"Critical failures detected across multiple operational sectors. You're building on sand."}:s<=65?{l:"SCALING CHAOS",c:"#ffb020",d:"Revenue is flowing but you are the single point of failure. Burnout window: 90–180 days without intervention."}:s<=85?{l:"SYSTEMS GAPS",c:"#ffffff",d:"Infrastructure is partially online. Specific gaps are blocking your path to 2x."}:{l:"OPTIMIZED",c:"#00e87b",d:"All systems nominal. You're ready for optimization and scale."}}
+function gC(s){return s<=40?"#ff3b4e":s<=65?"#ffb020":s<=85?"#fff":"#00e87b"}
+function gL(s){return s<=40?"CRITICAL":s<=65?"WARNING":s<=85?"NOMINAL":"OPTIMAL"}
+let uD={},ans=[],cQ=0;
+const cn='<div class="cb"></div><div class="cb2"></div><div class="shim"></div>';
+
+setInterval(()=>{const d=new Date();document.getElementById('clk').textContent=d.toLocaleTimeString('en-US',{hour12:false})+'.'+String(d.getMilliseconds()).padStart(3,'0').slice(0,2)},80);
+
+// ═══ UNLOCK CANVAS ═══
+!function(){const cv=document.getElementById('u-canvas'),x=cv.getContext('2d');
+let W,H;function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
+const cols=[];for(let i=0;i<8;i++)cols.push({x:Math.random()*2e3,speed:.3+Math.random()*.4,chars:[]});
+cols.forEach(c=>{for(let i=0;i<40;i++)c.chars.push({y:Math.random()*2e3,ch:String.fromCharCode(33+Math.floor(Math.random()*93)),a:.01+Math.random()*.025})});
+!function draw(){x.fillStyle='rgba(8,8,8,.06)';x.fillRect(0,0,W,H);
+x.font='11px "JetBrains Mono",monospace';
+cols.forEach(c=>{c.chars.forEach(ch=>{ch.y+=c.speed;if(ch.y>H+20){ch.y=-20;ch.ch=String.fromCharCode(33+Math.floor(Math.random()*93))}
+x.fillStyle=`rgba(255,255,255,${ch.a})`;x.fillText(ch.ch,c.x,ch.y)})});
+if(!document.getElementById('unlock').classList.contains('out'))requestAnimationFrame(draw)}()
+}();
+
+// ═══ BG PARTICLES ═══
+!function(){const cv=document.getElementById('bg-c'),x=cv.getContext('2d');let W,H;function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
+const pts=[];for(let i=0;i<35;i++)pts.push({x:Math.random()*3e3,y:Math.random()*3e3,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,r:Math.random()*.7+.2});
+!function draw(){x.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle='rgba(255,255,255,.02)';x.fill()});
+for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);if(d<100){x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);x.strokeStyle=`rgba(255,255,255,${.008*(1-d/100)})`;x.lineWidth=.4;x.stroke()}}
+requestAnimationFrame(draw)}()
+}();
+
+// ═══ UNLOCK ═══
+const CODE='EMPIRE';let authOn=false;
+function startAuth(){
+if(authOn)return;authOn=true;
+const fp=document.getElementById('fp'),msg=document.getElementById('u-msg'),sb=document.getElementById('sbar-u');
+fp.classList.add('active');msg.textContent='Scanning biometric signature...';sb.classList.add('active');
+setTimeout(()=>{
+fp.classList.add('done');fp.querySelector('.st').textContent='VERIFIED';
+msg.textContent='Biometric confirmed. Decrypting...';msg.classList.add('g');
+setTimeout(()=>{
+msg.classList.remove('g');msg.textContent='Decryption sequence initiated';
+const dials=document.querySelectorAll('.dial');let di=0;
+function setDial(){
+if(di>=CODE.length){setTimeout(()=>{
+// All green flash
+dials.forEach(d=>d.classList.add('set-grn'));
+sb.classList.remove('active');msg.textContent='ACCESS GRANTED';msg.classList.add('g');
+setTimeout(()=>{
+document.getElementById('unlock').classList.add('out');
+document.querySelectorAll('.crnr').forEach(c=>c.classList.add('v'));
+document.querySelector('.sbar').classList.add('v');
+setTimeout(()=>{document.getElementById('app').classList.add('vis');showIntro()},500)
+},1000)},500);return}
+const dial=dials[di];let spins=0;const mx=5+Math.floor(Math.random()*5);
+const si=setInterval(()=>{dial.textContent='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random()*36)];
+dial.classList.add('spin');setTimeout(()=>dial.classList.remove('spin'),60);spins++;
+if(spins>=mx){clearInterval(si);dial.textContent=CODE[di];dial.classList.add('set');
+msg.textContent=`Decrypting [${CODE.substring(0,di+1)}${'·'.repeat(CODE.length-di-1)}]`;
+di++;setTimeout(setDial,150)}},65)}
+setDial()},700)},1500)}
+
+// ═══ INTRO ═══
+function showIntro(){
+const el=document.getElementById('s-intro');el.style.display='block';
+document.getElementById('s-quiz').style.display='none';document.getElementById('s-results').style.display='none';
+el.innerHTML=`<div style="animation:fIn .7s ease">
+<div style="text-align:center;margin-bottom:42px">
+  <div style="font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:5px;color:var(--w4);text-transform:uppercase;margin-bottom:16px">// Empire Operating System</div>
+  <h1 style="font-size:clamp(28px,6vw,44px);font-weight:200;line-height:1.08;color:#fff;letter-spacing:-1px">Operational<br><span style="font-weight:700;color:var(--grn)">Diagnostic</span></h1>
+  <div style="width:40px;height:2px;background:var(--grn);margin:20px auto;box-shadow:0 0 10px rgba(0,232,123,.15)"></div>
+  <p style="font-size:13px;line-height:1.7;color:var(--w3);max-width:360px;margin:0 auto;font-weight:300">The 3-minute intelligence scan that shows you<br>exactly where your business is leaking money.</p>
+</div>
+<div class="p" style="margin-bottom:18px">${cn}
+  <div class="lb">What You'll Get</div>
+  ${["Your Empire Operating Score across 6 critical sectors","The #1 operational leak costing you the most revenue","How you compare to other creators at your revenue tier","AI-generated intelligence brief with your fix sequence","90-day projected trajectory if you resolve your top leak"].map((t,i)=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:5px 0;opacity:0;animation:oIn .3s ease ${.1+i*.08}s forwards"><span style="color:var(--grn);font:600 10px/1.4 'Orbitron',sans-serif;flex-shrink:0">0${i+1}</span><p style="font:300 12px/1.55 'Sora',sans-serif;color:var(--w2)">${t}</p></div>`).join('')}
+</div>
+<div class="p" style="padding:26px 24px">${cn}
+  <div class="lb">Begin Diagnostic</div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <input id="i-n" class="inp" placeholder="Your name">
+    <input id="i-e" class="inp" type="email" placeholder="Best email for your report">
+    <select id="i-r" class="inp" style="color:var(--w5)">
+      <option value="" disabled selected>Current monthly revenue</option>
+      <option value="10-30k">$10K – $30K / month</option>
+      <option value="30-50k">$30K – $50K / month</option>
+      <option value="50-100k">$50K – $100K / month</option>
+      <option value="100-150k">$100K – $150K / month</option>
+      <option value="150k+">$150K+ / month</option>
+    </select>
+    <button id="btn-go" class="btn" disabled onclick="startQ()">RUN DIAGNOSTIC</button>
+  </div>
+</div>
+<div style="text-align:center;margin-top:16px;font:400 7px/1 'JetBrains Mono',monospace;color:var(--w5);letter-spacing:2px">TAKES 3 MINUTES · YOUR DATA IS ENCRYPTED</div>
+</div>`;
+const v=()=>{const n=document.getElementById('i-n').value,e=document.getElementById('i-e').value,r=document.getElementById('i-r').value;document.getElementById('btn-go').disabled=!(n&&e&&r)};
+['i-n','i-e'].forEach(id=>document.getElementById(id).addEventListener('input',v));
+document.getElementById('i-r').addEventListener('change',()=>{document.getElementById('i-r').style.color='#fff';v()})
+}
+
+function startQ(){
+uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,rev:document.getElementById('i-r').value};
+ans=[];cQ=0;document.getElementById('s-intro').style.display='none';
+document.getElementById('s-quiz').style.display='block';renderQ()}
+
+function renderQ(){
+const q=Q[cQ],camp=C[q.c];
+let segs='';for(let i=0;i<Q.length;i++)segs+=`<div class="qp-s ${i<cQ?'dn':i===cQ?'nw':''}"></div>`;
+document.getElementById('s-quiz').innerHTML=`<div class="qc" id="qc">
+<div class="qp">${segs}</div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+  <div class="lb" style="margin:0">${camp.name}</div>
+  <div style="font:500 8px/1 'JetBrains Mono',monospace;color:var(--w5)">${String(cQ+1).padStart(2,'0')} of ${Q.length}</div>
+</div>
+<h2 style="font-size:18px;font-weight:400;line-height:1.5;margin-bottom:24px;color:#fff">${q.q}</h2>
+<div style="display:flex;flex-direction:column;gap:5px">
+${q.o.map((o,i)=>`<div class="or"><div class="opt" onclick="pick(${i})"><div class="oshim"></div><p style="font-size:12px;color:var(--w3);font-weight:300;line-height:1.55">${o.t}</p></div></div>`).join('')}
+</div></div>`}
+
+function pick(i){
+if(document.querySelector('.opt.sel'))return;
+ans.push({qi:cQ,oi:i,s:Q[cQ].o[i].s});
+document.querySelectorAll('.opt').forEach((el,idx)=>{if(idx===i)el.classList.add('sel');else el.classList.add('dim')});
+setTimeout(()=>{document.getElementById('qc').classList.add('out');
+setTimeout(()=>{if(cQ<Q.length-1){cQ++;renderQ()}else showResults()},300)},450)}
+
+// ═══ CONFIGURATION — UPDATE THESE ═══
+const CONFIG = {
+  airtable: {
+    // 1. Create a Personal Access Token at https://airtable.com/create/tokens
+    //    Grant it: data.records:write scope, access to your base
+    // 2. Get your Base ID from https://airtable.com/api (starts with "app")
+    // 3. Table name must match exactly (case-sensitive)
+    token: 'patrgrHRjMeFuLbzp.9c6eea06930d9a2f61935459f24540c59e534a3a2e48c324f380b0e184c0204a',
+    baseId: 'appbBRVglZF40uHQq',
+    table: 'Leads'                     // Table name in your base
+  },
+  convertkit: {
+    // 1. Get API key from Settings > Advanced in ConvertKit
+    // 2. Create a form in ConvertKit, grab the form ID from the URL
+    // 3. Create tags: "foundation", "scaling-chaos", "systems-gaps", "optimized"
+    apiKey: 'I12Rd-Jrh2wchUJtSScHKQ',
+    apiSecret: '0D0FmeXrQM0y3RQhveSnR00puzhywlAfqhz9lkeVS_U',
+    formId: '9077887'
+  },
+  calendly: 'https://calendly.com/thedigitalthroneinc/empire-strategy-call'
+};
+
+// ═══ AIRTABLE SUBMISSION ═══
+async function sendToAirtable(payload) {
+  if (CONFIG.airtable.token === 'YOUR_AIRTABLE_PAT') { console.warn('[Empire] Airtable not configured — skipping'); return; }
+  try {
+    const res = await fetch(`https://api.airtable.com/v0/${CONFIG.airtable.baseId}/${encodeURIComponent(CONFIG.airtable.table)}`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${CONFIG.airtable.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ records: [{ fields: payload }], typecast: true })
+    });
+    const data = await res.json();
+    console.log('[Empire] Airtable response:', JSON.stringify(data));
+    if (data.error) console.error('[Empire] Airtable error:', data.error.type, data.error.message);
+    else console.log('[Empire] Lead saved to Airtable:', data.records?.[0]?.id);
+  } catch (e) { console.error('[Empire] Airtable failed:', e); }
+}
+
+// ═══ KIT (CONVERTKIT) SUBMISSION ═══
+async function sendToConvertKit(email, name, tags) {
+  if (CONFIG.convertkit.apiKey === 'YOUR_CONVERTKIT_API_KEY') { console.warn('[Empire] Kit not configured — skipping'); return; }
+  try {
+    // Step 1: Subscribe to form (uses api_key)
+    const subRes = await fetch(`https://api.convertkit.com/v3/forms/${CONFIG.convertkit.formId}/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        api_key: CONFIG.convertkit.apiKey,
+        email: email,
+        first_name: name
+      })
+    });
+    const subData = await subRes.json();
+    console.log('[Empire] Kit form subscribe:', subRes.status, JSON.stringify(subData));
+
+    if (!subRes.ok) {
+      console.error('[Empire] Kit subscribe failed:', subData);
+      return;
+    }
+
+    // Step 2: Create tags and subscribe user to each (uses api_secret)
+    for (const tagName of tags) {
+      try {
+        // Create tag (or get existing) — V3 requires api_secret
+        let tagId = null;
+        const tagRes = await fetch('https://api.convertkit.com/v3/tags', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            api_secret: CONFIG.convertkit.apiSecret,
+            tag: { name: tagName }
+          })
+        });
+        const tagData = await tagRes.json();
+        console.log('[Empire] Kit tag create:', tagName, tagRes.status, JSON.stringify(tagData));
+
+        if (tagRes.status === 201) {
+          // New tag created
+          tagId = tagData.id;
+        } else if (tagRes.status === 422) {
+          // Tag already exists — fetch all tags and find the ID
+          const listRes = await fetch(`https://api.convertkit.com/v3/tags?api_key=${CONFIG.convertkit.apiKey}`);
+          const listData = await listRes.json();
+          const existing = (listData.tags || listData).find(t => t.name === tagName);
+          if (existing) tagId = existing.id;
+          console.log('[Empire] Kit found existing tag:', tagName, tagId);
+        }
+
+        // Subscribe email to this tag
+        if (tagId) {
+          const tSubRes = await fetch(`https://api.convertkit.com/v3/tags/${tagId}/subscribe`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              api_secret: CONFIG.convertkit.apiSecret,
+              email: email
+            })
+          });
+          console.log('[Empire] Kit tag subscribe:', tagName, tSubRes.status);
+        }
+      } catch (tagErr) { console.error('[Empire] Kit tag error:', tagName, tagErr); }
+    }
+    console.log('[Empire] Kit complete — subscriber + tags applied');
+  } catch (e) { console.error('[Empire] Kit failed:', e); }
+}
+
+// ═══ BUILD CALENDLY URL WITH CONTEXT ═══
+function getCalendlyUrl(name, email, score, leak) {
+  if (CONFIG.calendly === 'YOUR_CALENDLY_LINK') return '#';
+  const params = new URLSearchParams({
+    name,
+    email,
+    a1: `Score: ${score}`,          // Calendly custom question answers
+    a2: `Primary leak: ${leak}`,
+    utm_source: 'empire_assessment',
+    utm_medium: 'diagnostic',
+    utm_campaign: 'launch'
+  });
+  return `${CONFIG.calendly}?${params.toString()}`;
+}
+
+function showResults(){
+document.getElementById('s-quiz').style.display='none';
+const el=document.getElementById('s-results');el.style.display='block';
+const cs={},cc={};ans.forEach(a=>{const q=Q[a.qi];cs[q.c]=(cs[q.c]||0)+a.s;cc[q.c]=(cc[q.c]||0)+1});
+const fs={};Object.keys(cs).forEach(k=>{fs[k]=Math.round(cs[k]/cc[k])});
+const ov=Math.round(Object.values(fs).reduce((a,b)=>a+b,0)/Object.keys(fs).length);
+const ph=gP(ov),sorted=Object.entries(fs).sort((a,b)=>a[1]-b[1]),w=sorted[0],s2=sorted[1],bm=BM[uD.rev]||BM["50-100k"];
+
+// ═══ FIRE DATA TO ALL SYSTEMS ═══
+const phaseTag = ph.l.toLowerCase().replace(' ','-'); // "foundation", "scaling-chaos", etc.
+const primaryLeak = C[w[0]].name;
+const secondaryLeak = s2 ? C[s2[0]].name : 'N/A';
+
+// Build detailed answer log for Airtable Assessment Notes
+const answerLog = ans.map(a => {
+  const q = Q[a.qi];
+  return `[${C[q.c].name}] Q: ${q.q}\nA: ${q.o[a.oi].t} (Score: ${a.s}/100)`;
+}).join('\n\n');
+
+const fullNotes = `EMPIRE OPERATING SCORE: ${ov}/100
+PHASE: ${ph.l}
+PRIMARY LEAK: ${primaryLeak} (${w[1]}/100)
+SECONDARY LEAK: ${secondaryLeak}${s2 ? ' ('+s2[1]+'/100)' : ''}
+REVENUE TIER: ${uD.rev}
+
+--- SECTOR SCORES ---
+${sorted.map(([k,sc]) => `${C[k].name}: ${sc}/100 [${gL(sc)}]`).join('\n')}
+
+--- FULL ANSWER LOG ---
+${answerLog}
+
+--- BENCHMARKS ---
+Tier Average: ${bm.a} | Top 10%: ${bm.t} | This Lead: ${ov}
+${ab ? 'ABOVE average for tier' : 'BELOW average for tier — high urgency lead'}`;
+
+// Airtable — full lead record with detailed notes
+sendToAirtable({
+  'Name': uD.name,
+  'Email': uD.email,
+  'Revenue Tier': uD.rev,
+  'Overall Score': ov,
+  'Phase': ph.l,
+  'Primary Leak': primaryLeak,
+  'Secondary Leak': secondaryLeak,
+  'Content Ops': fs.content || 0,
+  'Revenue Ops': fs.revenue || 0,
+  'Audience': fs.audience || 0,
+  'Team': fs.team || 0,
+  'Intelligence': fs.intelligence || 0,
+  'CEO Rhythm': fs.ceo || 0,
+  'Date Taken': new Date().toISOString(),
+  'Source': document.referrer || 'direct',
+  'Status': 'New',
+  'Assessment Notes': fullNotes
+});
+
+// ConvertKit — email + phase tag + revenue tag
+sendToConvertKit(uD.email, uD.name, [phaseTag, `rev-${uD.rev}`, `leak-${w[0]}`]);
+
+// Build Calendly URL with pre-filled context
+const calUrl = getCalendlyUrl(uD.name, uD.email, ov, primaryLeak);
+const sz=180,sw=2.5,r=(sz-sw*2)/2,ci=2*Math.PI*r,ab=ov>=bm.a;
+
+el.innerHTML=`
+<div class="rv" data-s="1" style="text-align:center;margin-bottom:4px"><div style="font:700 7px/1 'Orbitron',sans-serif;letter-spacing:4px;color:var(--w5)">◇ CLASSIFIED REPORT ◇</div></div>
+<div class="rv" data-s="1" style="text-align:center;margin-bottom:22px">
+  <p style="font:300 13px/1 'Sora',sans-serif;color:var(--w4);margin:10px 0 18px">${uD.name}, here's your operational intelligence.</p>
+  <div class="lb" style="text-align:center">Empire Operating Score</div>
+  <div style="position:relative;width:${sz}px;height:${sz}px;margin:0 auto">
+    <svg width="${sz}" height="${sz}" style="transform:rotate(-90deg)">
+      <circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="${sw}"/>
+      <circle id="sr" cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${ph.c}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${ci}" stroke-dashoffset="${ci}" class="srf"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <span id="sn" style="font:300 46px/1 'Orbitron',sans-serif;color:${ph.c}">0</span>
+      <div style="width:20px;height:1px;background:rgba(255,255,255,.08);margin:6px 0 4px"></div>
+      <span style="font:500 7px/1 'JetBrains Mono',monospace;letter-spacing:2.5px;color:var(--w5)">OF 100</span>
+    </div>
+  </div>
+  <div style="margin-top:14px"><span style="display:inline-block;padding:5px 18px;border:1.5px solid ${ph.c};font:700 8px/1.4 'Orbitron',sans-serif;letter-spacing:3px;color:${ph.c}">${ph.l}</span></div>
+  <p style="max-width:380px;margin:14px auto 0;font-size:12px;line-height:1.65;color:var(--w3);font-weight:300">${ph.d}</p>
+</div>
+
+<div class="rv" data-s="2"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
+
+<div class="rv" data-s="2"><div class="p" style="margin-bottom:18px">${cn}
+  <div class="lb">How You Compare</div>
+  <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;gap:22px">
+      ${[{l:"TIER AVG",v:bm.a,c:"var(--amb)"},{l:"TOP 10%",v:bm.t,c:"var(--grn)"},{l:"YOU",v:ov,c:ph.c}].map(b=>`<div><p style="font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:var(--w5);margin-bottom:4px">${b.l}</p><p style="font:300 24px/1 'Orbitron',sans-serif;color:${b.c}">${b.v}</p></div>`).join('')}
+    </div>
+    <div style="font:700 9px/1 'Orbitron',sans-serif;color:${ab?'var(--grn)':'var(--red)'};align-self:center;letter-spacing:1px">${ab?'▲ '+(ov-bm.a)+' ABOVE AVG':'▼ '+(bm.a-ov)+' BELOW AVG'}</div>
+  </div>
+</div></div>
+
+<div class="rv" data-s="3"><div class="lb">Sector-by-Sector Breakdown</div>
+<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:4px">
+${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr" style="transition-delay:${i*80}ms"><div class="p ${iw?'p-r':''}" style="padding:14px 16px">${cn}
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+    <div style="flex:1 1 140px"><p style="font-size:13px;font-weight:500;color:#fff">${cm.name}</p>${iw?'<p style="font:700 6.5px/1 \'JetBrains Mono\',monospace;letter-spacing:2.5px;color:var(--red);margin-top:3px">⚠ PRIMARY LEAK</p>':''}</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:55px;height:3px;background:rgba(255,255,255,.04);overflow:hidden;border-radius:1px"><div class="bf" data-w="${sc}" style="height:100%;background:${cl};border-radius:1px;transition-delay:${400+i*120}ms"></div></div>
+      <span style="font:400 18px/1 'Orbitron',sans-serif;color:${cl};min-width:26px;text-align:right">${sc}</span>
+      <span style="font:700 6.5px/1 'JetBrains Mono',monospace;letter-spacing:1.5px;color:${cl};min-width:50px">${gL(sc)}</span>
+    </div>
+  </div>
+</div></div>`}).join('')}
+</div></div>
+
+<div class="rv" data-s="4"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
+
+<div class="rv" data-s="4"><div class="p p-r" style="padding:24px">${cn}
+  <div class="lb lb-r">Your Biggest Leak</div>
+  <p style="font-size:18px;font-weight:300;line-height:1.3;margin-bottom:12px;color:#fff"><span style="font-weight:600">${C[w[0]].name}</span> is costing you the most.</p>
+  <p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300;margin-bottom:8px">Right now you're running the <span style="color:var(--red);font-weight:600">${C[w[0]].broken}</span> — ${C[w[0]].brokenDesc}.<br>The fix: shift to the <span style="color:var(--grn);font-weight:600">${C[w[0]].correct}</span> — ${C[w[0]].correctDesc}.</p>
+  ${s2&&s2[1]<=50?`<p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300">Secondary leak: <span style="color:var(--amb);font-weight:600">${C[s2[0]].name}</span> scoring ${s2[1]}/100.</p>`:''}
+</div></div>
+
+<div class="rv" data-s="5"><div class="p p-g" style="padding:22px 24px;margin-top:18px">${cn}
+  <div class="lb lb-g">90-Day Projection</div>
+  <p style="font-size:13px;line-height:1.7;color:var(--w2);font-weight:300">Fix <span style="font-weight:600">${C[w[0]].name}</span>${s2&&s2[1]<=50?' and '+C[s2[0]].name:''} and your score moves from <span style="color:${ph.c};font-family:'Orbitron',sans-serif;font-weight:700">${ov}</span> to <span style="color:var(--grn);font-family:'Orbitron',sans-serif;font-weight:700">${Math.min(ov+25,95)}</span>. Projected revenue impact: <span style="color:var(--grn);font-weight:700">30–50% growth</span> in 90 days.</p>
+</div></div>
+
+<div class="rv" data-s="5"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
+
+<div class="rv" data-s="6"><div class="p" style="padding:40px 26px;text-align:center;animation:glowPulse 3s ease infinite">${cn}
+  <div class="lb" style="text-align:center">Next Step</div>
+  <p style="font-size:22px;font-weight:300;line-height:1.2;margin-bottom:8px;color:#fff">Get your fix sequence.</p>
+  <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">45-minute strategy call. We'll diagnose the root cause, build your fix sequence, and map your first 30 days.</p>
+  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px">BOOK YOUR STRATEGY CALL</a>
+  <p style="font:500 7px/1 'JetBrains Mono',monospace;color:var(--w5);margin-top:16px;letter-spacing:2px">FREE · LIMITED TO 6 SLOTS PER WEEK</p>
+</div></div>
+
+<div class="rv" data-s="6" style="text-align:center;margin-top:18px">
+  <button onclick="downloadReport()" class="btn btn-w" style="display:inline-block;width:auto;padding:12px 32px;font-size:7.5px">DOWNLOAD YOUR REPORT</button>
+</div>`;
+
+// ═══ DOWNLOAD REPORT AS HTML ═══
+window._reportData = { name: uD.name, email: uD.email, rev: uD.rev, ov, ph, sorted, fs, w, s2, primaryLeak, secondaryLeak, bm, ab, ans, fullNotes };
+
+setTimeout(()=>{
+document.getElementById('sr').style.strokeDashoffset=ci-(ov/100)*ci;
+let c=0;const step=ov/70;const t=setInterval(()=>{c+=step;if(c>=ov){c=ov;clearInterval(t)}document.getElementById('sn').textContent=Math.round(c)},16)},450);
+for(let s=1;s<=6;s++)setTimeout(()=>{
+document.querySelectorAll(`.rv[data-s="${s}"]`).forEach(e=>e.classList.add('v'));
+if(s===3){setTimeout(()=>document.querySelectorAll('.cr').forEach(e=>e.classList.add('v')),80);
+setTimeout(()=>document.querySelectorAll('.bf').forEach(e=>{e.style.width=e.dataset.w+'%'}),350)}
+},s*300)}
+
+// ═══ DOWNLOAD REPORT ═══
+function downloadReport() {
+  const d = window._reportData;
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Empire Operating Score — ${d.name}</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0c0c0c;color:#e8e8e8;font-family:'Sora',sans-serif;padding:40px;max-width:700px;margin:0 auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.hdr{text-align:center;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.06)}
+.lbl{font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:4px;color:#888;text-transform:uppercase;margin-bottom:8px}
+h1{font:200 36px/1.1 'Sora',sans-serif;color:#fff}h1 b{font-weight:700;color:#00e87b}
+.score-row{display:flex;align-items:center;justify-content:center;gap:30px;margin:30px 0}
+.big-score{font:300 64px/1 'Orbitron',sans-serif}
+.phase{display:inline-block;padding:6px 20px;border:1.5px solid;font:700 9px/1.4 'Orbitron',sans-serif;letter-spacing:3px;margin-top:8px}
+.section{margin:30px 0;padding:24px;border:1px solid rgba(255,255,255,.06);position:relative}
+.section::before{content:'';position:absolute;top:-1px;left:-1px;width:10px;height:10px;border-top:1px solid rgba(255,255,255,.15);border-left:1px solid rgba(255,255,255,.15)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.row:last-child{border:none}
+.bar{width:80px;height:3px;background:rgba(255,255,255,.04);margin:0 12px}
+.bar-fill{height:100%;border-radius:1px}
+.red{color:#ff3b4e}.amb{color:#ffb020}.grn{color:#00e87b}
+.answer{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.answer:last-child{border:none}
+.answer .q{font-size:11px;color:#888;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.answer .a{font-size:13px;color:#e8e8e8}
+.answer .s{font:600 11px/1 'Orbitron',sans-serif;float:right}
+.cta{text-align:center;padding:40px;margin-top:30px;border:1px solid rgba(0,232,123,.2);background:rgba(0,232,123,.04)}
+.cta a{display:inline-block;padding:14px 40px;background:#00e87b;color:#000;text-decoration:none;font:700 9px/1 'Orbitron',sans-serif;letter-spacing:3px}
+.footer{text-align:center;margin-top:30px;font:400 7px/1 'JetBrains Mono',monospace;color:#555;letter-spacing:2px}
+@media print{body{padding:20px}@page{margin:0.5in}}
+</style></head><body>
+<div class="hdr">
+  <div class="lbl">// Empire Operating System — Classified Report</div>
+  <h1>Operational <b>Diagnostic</b></h1>
+  <p style="margin-top:12px;font-size:12px;color:#888">Prepared for <strong style="color:#fff">${d.name}</strong> · ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</p>
+</div>
+
+<div style="text-align:center">
+  <div class="lbl">Empire Operating Score</div>
+  <div class="big-score" style="color:${d.ph.c}">${d.ov}</div>
+  <div style="width:20px;height:1px;background:rgba(255,255,255,.08);margin:8px auto"></div>
+  <div style="font:500 7px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:#888">OF 100</div>
+  <div class="phase" style="color:${d.ph.c};border-color:${d.ph.c};margin-top:14px">${d.ph.l}</div>
+  <p style="max-width:400px;margin:14px auto 0;font-size:12px;line-height:1.6;color:#c0c0c0;font-weight:300">${d.ph.d}</p>
+</div>
+
+<div class="section">
+  <div class="lbl">// How You Compare — ${d.rev} Tier</div>
+  <div style="display:flex;gap:30px;margin-top:12px">
+    <div><div style="font:600 6px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:#888">TIER AVG</div><div style="font:300 28px/1 'Orbitron',sans-serif;color:#ffb020">${d.bm.a}</div></div>
+    <div><div style="font:600 6px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:#888">TOP 10%</div><div style="font:300 28px/1 'Orbitron',sans-serif;color:#00e87b">${d.bm.t}</div></div>
+    <div><div style="font:600 6px/1 'JetBrains Mono',monospace;letter-spacing:2px;color:#888">YOU</div><div style="font:300 28px/1 'Orbitron',sans-serif;color:${d.ph.c}">${d.ov}</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="lbl">// Sector-by-Sector Breakdown</div>
+  ${d.sorted.map(([k,sc],i) => {
+    const cl = gC(sc);
+    return `<div class="row">
+      <span style="font-size:13px;font-weight:${i===0?'600':'400'};color:#fff;flex:1">${C[k].name}${i===0?' <span style="font:700 6px/1 \'JetBrains Mono\',monospace;color:#ff3b4e;letter-spacing:2px;margin-left:6px">⚠ PRIMARY LEAK</span>':''}</span>
+      <div class="bar"><div class="bar-fill" style="width:${sc}%;background:${cl}"></div></div>
+      <span style="font:400 16px/1 'Orbitron',sans-serif;color:${cl};min-width:28px;text-align:right">${sc}</span>
+      <span style="font:700 6px/1 'JetBrains Mono',monospace;color:${cl};min-width:55px;text-align:right;letter-spacing:1px">${gL(sc)}</span>
+    </div>`;
+  }).join('')}
+</div>
+
+<div class="section" style="border-color:rgba(255,59,78,.2);background:rgba(255,59,78,.03)">
+  <div class="lbl" style="color:#ff3b4e">// Primary Operational Leak</div>
+  <p style="font-size:16px;font-weight:300;margin:8px 0;color:#fff"><strong>${d.primaryLeak}</strong> — scoring ${d.w[1]}/100</p>
+  <p style="font-size:12px;line-height:1.65;color:#c0c0c0;font-weight:300">Current model: <span style="color:#ff3b4e;font-weight:600">${C[d.w[0]].broken}</span> — ${C[d.w[0]].brokenDesc}.</p>
+  <p style="font-size:12px;line-height:1.65;color:#c0c0c0;font-weight:300;margin-top:4px">Target model: <span style="color:#00e87b;font-weight:600">${C[d.w[0]].correct}</span> — ${C[d.w[0]].correctDesc}.</p>
+</div>
+
+<div class="section">
+  <div class="lbl">// Full Answer Log</div>
+  ${d.ans.map(a => {
+    const q = Q[a.qi];
+    const cl = gC(a.s);
+    return `<div class="answer"><div class="q">${C[q.c].name}</div><div class="a">${q.q}<span class="s" style="color:${cl}">${a.s}</span></div><div style="font-size:11px;color:#888;margin-top:4px;padding-left:12px;border-left:2px solid rgba(255,255,255,.04)">→ ${q.o[a.oi].t}</div></div>`;
+  }).join('')}
+</div>
+
+<div class="section" style="border-color:rgba(0,232,123,.2);background:rgba(0,232,123,.03)">
+  <div class="lbl" style="color:#00e87b">// 90-Day Projection</div>
+  <p style="font-size:13px;line-height:1.65;color:#e8e8e8;font-weight:300">Fix <strong>${d.primaryLeak}</strong>${d.s2&&d.s2[1]<=50?' and '+C[d.s2[0]].name:''} → Score moves from <span style="color:${d.ph.c};font-family:'Orbitron',sans-serif;font-weight:700">${d.ov}</span> to <span style="color:#00e87b;font-family:'Orbitron',sans-serif;font-weight:700">${Math.min(d.ov+25,95)}</span>. Projected revenue impact: <strong style="color:#00e87b">30–50% growth</strong>.</p>
+</div>
+
+<div class="cta">
+  <p style="font-size:18px;font-weight:300;margin-bottom:6px;color:#fff">Ready for your fix sequence?</p>
+  <p style="font-size:11px;color:#c0c0c0;font-weight:300;margin-bottom:18px">45-minute strategy call. Your numbers. Your roadmap. Your first 30 days mapped.</p>
+  <a href="https://calendly.com/thedigitalthroneinc/empire-strategy-call">BOOK YOUR STRATEGY CALL</a>
+</div>
+
+<div class="footer">EMPIRE OPERATING SYSTEM · CLASSIFIED · ${new Date().toISOString().split('T')[0]}</div>
+</body></html>`;
+
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Empire-Diagnostic-${d.name.replace(/\s+/g,'-')}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
