@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K36655C2YT"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-K36655C2YT');
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>Empire Operating Score — Creator Empire Diagnostic</title>
 <meta name="description" content="The 3-minute intelligence scan that reveals exactly where your creator business is leaking revenue. Free operational diagnostic for creators earning $10K-$150K/month.">
@@ -293,6 +301,7 @@ setDial()},700)},1500)}
 
 // ═══ INTRO ═══
 function showIntro(){
+gtag('event', 'funnel_step', { step: 'intro_loaded' });
 const el=document.getElementById('s-intro');el.style.display='block';
 document.getElementById('s-quiz').style.display='none';document.getElementById('s-results').style.display='none';
 el.innerHTML=`<div style="animation:fIn .7s ease">
@@ -331,6 +340,17 @@ document.getElementById('i-r').addEventListener('change',()=>{document.getElemen
 
 function startQ(){
 uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,rev:document.getElementById('i-r').value};
+gtag('event', 'funnel_step', { step: 'assessment_started', revenue_tier: uD.rev });
+// Partial lead capture — save to Airtable even if they don't finish
+sendToAirtable({
+  'Name': uD.name,
+  'Email': uD.email,
+  'Revenue Tier': uD.rev,
+  'Status': 'Started',
+  'Date Taken': new Date().toISOString(),
+  'Source': document.referrer || 'direct',
+  'Assessment Notes': 'PARTIAL — Started assessment but has not completed yet.'
+});
 ans=[];cQ=0;document.getElementById('s-intro').style.display='none';
 document.getElementById('s-quiz').style.display='block';renderQ()}
 
@@ -351,6 +371,7 @@ ${q.o.map((o,i)=>`<div class="or"><div class="opt" onclick="pick(${i})"><div cla
 function pick(i){
 if(document.querySelector('.opt.sel'))return;
 ans.push({qi:cQ,oi:i,s:Q[cQ].o[i].s});
+gtag('event', 'funnel_step', { step: 'question_answered', question_number: cQ + 1, campaign: Q[cQ].c, score: Q[cQ].o[i].s });
 document.querySelectorAll('.opt').forEach((el,idx)=>{if(idx===i)el.classList.add('sel');else el.classList.add('dim')});
 setTimeout(()=>{document.getElementById('qc').classList.add('out');
 setTimeout(()=>{if(cQ<Q.length-1){cQ++;renderQ()}else showResults()},300)},450)}
@@ -483,6 +504,7 @@ const cs={},cc={};ans.forEach(a=>{const q=Q[a.qi];cs[q.c]=(cs[q.c]||0)+a.s;cc[q.
 const fs={};Object.keys(cs).forEach(k=>{fs[k]=Math.round(cs[k]/cc[k])});
 const ov=Math.round(Object.values(fs).reduce((a,b)=>a+b,0)/Object.keys(fs).length);
 const ph=gP(ov),sorted=Object.entries(fs).sort((a,b)=>a[1]-b[1]),w=sorted[0],s2=sorted[1],bm=BM[uD.rev]||BM["50-100k"];
+gtag('event', 'funnel_step', { step: 'assessment_completed', overall_score: ov, phase: ph.l, primary_leak: C[w[0]].name, revenue_tier: uD.rev });
 
 // ═══ FIRE DATA TO ALL SYSTEMS ═══
 const phaseTag = ph.l.toLowerCase().replace(/\s+/g,'-'); // "operator-embedded", "growth-bottleneck", etc.
@@ -545,7 +567,7 @@ sendToAirtable({
   'Operator Cadence': fs.ceo || 0,
   'Date Taken': new Date().toISOString(),
   'Source': document.referrer || 'direct',
-  'Status': 'New',
+  'Status': 'Completed',
   'Assessment Notes': fullNotes
 });
 
@@ -623,12 +645,12 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
   <div class="lb" style="text-align:center">Next Step</div>
   <p style="font-size:22px;font-weight:300;line-height:1.2;margin-bottom:8px;color:#fff">${ov<=40?'See the 90-day exit plan from operator dependency.':ov<=65?'Find out which bottleneck to remove first.':ov<=85?'Get the surgical fix for your specific fractures.':'Unlock the next tier of operational leverage.'}</p>
   <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">45-minute diagnostic call. We review your score, identify the root cause, and map your first 30 days.</p>
-  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px">BOOK YOUR DIAGNOSTIC CALL</a>
+  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px" onclick="gtag('event','funnel_step',{step:'diagnostic_call_clicked',score:${ov},phase:'${ph.l}'})">BOOK YOUR DIAGNOSTIC CALL</a>
   <p style="font:500 7px/1 'JetBrains Mono',monospace;color:var(--w5);margin-top:16px;letter-spacing:2px">FREE · LIMITED TO 6 SLOTS PER WEEK</p>
 </div></div>
 
 <div class="rv" data-s="6" style="text-align:center;margin-top:18px">
-  <button onclick="downloadReport()" class="btn btn-w" style="display:inline-block;width:auto;padding:12px 32px;font-size:7.5px">DOWNLOAD YOUR REPORT</button>
+  <button onclick="gtag('event','funnel_step',{step:'report_downloaded'});downloadReport()" class="btn btn-w" style="display:inline-block;width:auto;padding:12px 32px;font-size:7.5px">DOWNLOAD YOUR REPORT</button>
 </div>`;
 
 // ═══ DOWNLOAD REPORT AS HTML ═══
