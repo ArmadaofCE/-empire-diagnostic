@@ -228,10 +228,10 @@ select option{background:var(--bg2);color:#fff}
 </div>
 
 <script>
-const C={content:{name:"Content Operations",broken:"Artist Model",correct:"Factory Model",brokenDesc:"waiting for inspiration, inconsistent output",correctDesc:"batch production, 2+ week content buffer"},revenue:{name:"Revenue Operations",broken:"Hope-Based Model",correct:"Math-Based Model",brokenDesc:"winging it, reactive pricing",correctDesc:"data-driven decisions, tracked metrics"},audience:{name:"Audience Acquisition",broken:"Spray & Pray",correct:"Targeted Acquisition",brokenDesc:"posting everywhere, no funnel",correctDesc:"platform focus, lead magnets, conversion path"},team:{name:"Team & Delegation",broken:"Freelancer Model",correct:"CEO Model",brokenDesc:"doing everything yourself",correctDesc:"clear roles, documented SOPs"},intelligence:{name:"Business Intelligence",broken:"Gut Feel Model",correct:"Data-Driven Model",brokenDesc:"no metrics, reactive",correctDesc:"weekly scorecard, OKRs"},ceo:{name:"CEO Rhythm",broken:"Reactive Model",correct:"Proactive Model",brokenDesc:"firefighting, no planning",correctDesc:"recurring meetings, quarterly planning"}};
+const C={content:{name:"Content Engine",broken:"Artist Model",correct:"Factory Model",brokenDesc:"waiting for inspiration, inconsistent output",correctDesc:"batch production, 2+ week content buffer"},revenue:{name:"Revenue Intelligence",broken:"Hope-Based Model",correct:"Math-Based Model",brokenDesc:"winging it, reactive pricing",correctDesc:"data-driven decisions, tracked metrics"},audience:{name:"Acquisition System",broken:"Spray & Pray",correct:"Targeted Acquisition",brokenDesc:"posting everywhere, no funnel",correctDesc:"platform focus, lead magnets, conversion path"},team:{name:"Delegation Architecture",broken:"Freelancer Model",correct:"CEO Model",brokenDesc:"doing everything yourself",correctDesc:"clear roles, documented SOPs"},intelligence:{name:"Decision Infrastructure",broken:"Gut Feel Model",correct:"Data-Driven Model",brokenDesc:"no metrics, reactive",correctDesc:"weekly scorecard, OKRs"},ceo:{name:"Operator Cadence",broken:"Reactive Model",correct:"Proactive Model",brokenDesc:"firefighting, no planning",correctDesc:"recurring meetings, quarterly planning"}};
 const Q=[{c:"content",q:"How would you describe your content creation process?",o:[{t:"I post when inspiration hits — no real schedule",s:15},{t:"I try to be consistent but fall off regularly",s:40},{t:"I batch create with an editorial calendar",s:70},{t:"Full production pipeline with 2+ weeks buffer",s:95}]},{c:"content",q:"Do you have documented SOPs for content creation?",o:[{t:"No — it's all in my head",s:10},{t:"Partial notes, nothing someone else could follow",s:35},{t:"Yes — someone could replicate my process from the docs",s:80},{t:"Fully documented and delegated to a team member",s:100}]},{c:"revenue",q:"How do you make your biggest money decisions?",o:[{t:"Intuition — 'this feels right'",s:15},{t:"Some data, but mostly gut feel",s:40},{t:"I track key metrics and use data for most decisions",s:75},{t:"Completely math-based — I know my CAC, LTV, and margins cold",s:100}]},{c:"revenue",q:"What percentage of your revenue is recurring or predictable?",o:[{t:"0–25% — mostly one-time or launch-based",s:20},{t:"26–50% — some recurring but unpredictable",s:45},{t:"51–75% — majority recurring",s:75},{t:"76–100% — highly predictable month over month",s:100}]},{c:"audience",q:"How would you describe your audience growth strategy?",o:[{t:"Post and pray — no real strategy",s:10},{t:"Active on multiple platforms but spreading thin",s:30},{t:"Focused on 1–2 platforms with a lead magnet and email list",s:70},{t:"Full funnel — platform → lead magnet → nurture → convert",s:95}]},{c:"team",q:"How many hours per week do YOU spend on admin and operations?",o:[{t:"31–40+ hours — I basically am the business",s:10},{t:"21–30 hours — doing most things myself",s:30},{t:"11–20 hours — I have help but I'm still the bottleneck",s:60},{t:"0–10 hours — my team handles it",s:95}]},{c:"team",q:"Does your team have clearly documented roles and responsibilities?",o:[{t:"No team or no documentation at all",s:10},{t:"I have help but they always have to ask me what to do",s:30},{t:"Partial documentation — some things are covered",s:60},{t:"Fully documented — my team operates independently",s:95}]},{c:"intelligence",q:"Do you track key business metrics on a weekly basis?",o:[{t:"No — honestly not sure what my numbers are",s:10},{t:"I check revenue occasionally",s:30},{t:"I track revenue and a few other metrics monthly",s:55},{t:"Weekly scorecard with 5–10 KPIs I review religiously",s:95}]},{c:"ceo",q:"How do you plan your weeks, months, and quarters?",o:[{t:"I don't — I react to whatever's most urgent",s:10},{t:"Loose weekly plan that I rarely follow through on",s:30},{t:"Solid weekly rhythm but no quarterly planning",s:60},{t:"Weekly rhythm + quarterly rocks + annual vision — all connected",s:95}]},{c:"ceo",q:"When an unexpected problem hits your business, what happens?",o:[{t:"I drop everything and firefight until it's solved",s:10},{t:"I stress about it and handle it reactively",s:30},{t:"I log it and address it in my next planning session",s:70},{t:"My team flags it, we do root cause analysis, and build a system to prevent it",s:95}]}];
 const BM={"10-30k":{a:38,t:62},"30-50k":{a:47,t:71},"50-100k":{a:56,t:78},"100-150k":{a:64,t:85},"150k+":{a:72,t:91}};
-function gP(s){return s<=40?{l:"FOUNDATION",c:"#ff3b4e",d:"Critical failures detected across multiple operational sectors. You're building on sand."}:s<=65?{l:"SCALING CHAOS",c:"#ffb020",d:"Revenue is flowing but you are the single point of failure. Burnout window: 90–180 days without intervention."}:s<=85?{l:"SYSTEMS GAPS",c:"#ffffff",d:"Infrastructure is partially online. Specific gaps are blocking your path to 2x."}:{l:"OPTIMIZED",c:"#00e87b",d:"All systems nominal. You're ready for optimization and scale."}}
+function gP(s){return s<=40?{l:"OPERATOR EMBEDDED",c:"#ff3b4e",d:"You are the operating system. Every function runs through you. Revenue exists because you show up. Remove you for 30 days and the business stalls. This isn't a judgment — it's how every creator business starts. The problem is you've outgrown it."}:s<=65?{l:"GROWTH BOTTLENECK",c:"#ffb020",d:"Revenue is working. Growth is happening. But you can't scale because you're the bottleneck on too many decisions. You built something real on instinct. Now instinct alone can't get you to 2x."}:s<=85?{l:"SYSTEM FRACTURES",c:"#ffffff",d:"Most of your operations are functional. But 1–2 specific systems are significantly weaker than the rest. These fractures are the precise reason you're plateaued. Fix them and the ceiling lifts."}:{l:"OPTIMIZATION READY",c:"#00e87b",d:"Your operational infrastructure is strong across the board. The question isn't what's broken — it's what's possible when every system runs at 95%+."}}
 function gC(s){return s<=40?"#ff3b4e":s<=65?"#ffb020":s<=85?"#fff":"#00e87b"}
 function gL(s){return s<=40?"CRITICAL":s<=65?"WARNING":s<=85?"NOMINAL":"OPTIMAL"}
 let uD={},ans=[],cQ=0;
@@ -304,7 +304,7 @@ el.innerHTML=`<div style="animation:fIn .7s ease">
 </div>
 <div class="p" style="margin-bottom:18px">${cn}
   <div class="lb">What You'll Get</div>
-  ${["Your Empire Operating Score across 6 critical sectors","The #1 operational leak costing you the most revenue","How you compare to other creators at your revenue tier","AI-generated intelligence brief with your fix sequence","90-day projected trajectory if you resolve your top leak"].map((t,i)=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:5px 0;opacity:0;animation:oIn .3s ease ${.1+i*.08}s forwards"><span style="color:var(--grn);font:600 10px/1.4 'Orbitron',sans-serif;flex-shrink:0">0${i+1}</span><p style="font:300 12px/1.55 'Sora',sans-serif;color:var(--w2)">${t}</p></div>`).join('')}
+  ${["Your Empire Operating Score across 6 critical sectors","The #1 operational leak costing you the most revenue","How you compare to other creators at your revenue tier","Your personalized fix sequence — which system to build first and why","90-day projected trajectory if you resolve your top leak"].map((t,i)=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:5px 0;opacity:0;animation:oIn .3s ease ${.1+i*.08}s forwards"><span style="color:var(--grn);font:600 10px/1.4 'Orbitron',sans-serif;flex-shrink:0">0${i+1}</span><p style="font:300 12px/1.55 'Sora',sans-serif;color:var(--w2)">${t}</p></div>`).join('')}
 </div>
 <div class="p" style="padding:26px 24px">${cn}
   <div class="lb">Begin Diagnostic</div>
@@ -362,8 +362,8 @@ const CONFIG = {
     //    Grant it: data.records:write scope, access to your base
     // 2. Get your Base ID from https://airtable.com/api (starts with "app")
     // 3. Table name must match exactly (case-sensitive)
-    token: 'patrgrHRjMeFuLbzp.9c6eea06930d9a2f61935459f24540c59e534a3a2e48c324f380b0e184c0204a',
-    baseId: 'appbBRVglZF40uHQq',
+    token: 'patdGmUD6168vC1Xj.60893de967f922ff34382cac5a7ed32b13e36fc64924e0eb913afb0881fa8846',
+    baseId: 'appc4csPCLzpaxlZG',
     table: 'Leads'                     // Table name in your base
   },
   convertkit: {
@@ -485,7 +485,7 @@ const ov=Math.round(Object.values(fs).reduce((a,b)=>a+b,0)/Object.keys(fs).lengt
 const ph=gP(ov),sorted=Object.entries(fs).sort((a,b)=>a[1]-b[1]),w=sorted[0],s2=sorted[1],bm=BM[uD.rev]||BM["50-100k"];
 
 // ═══ FIRE DATA TO ALL SYSTEMS ═══
-const phaseTag = ph.l.toLowerCase().replace(' ','-'); // "foundation", "scaling-chaos", etc.
+const phaseTag = ph.l.toLowerCase().replace(/\s+/g,'-'); // "operator-embedded", "growth-bottleneck", etc.
 const primaryLeak = C[w[0]].name;
 const secondaryLeak = s2 ? C[s2[0]].name : 'N/A';
 
@@ -502,8 +502,24 @@ PRIMARY LEAK: ${primaryLeak} (${w[1]}/100)
 SECONDARY LEAK: ${secondaryLeak}${s2 ? ' ('+s2[1]+'/100)' : ''}
 REVENUE TIER: ${uD.rev}
 
+--- NARRATIVE ANALYSIS (What They Saw) ---
+Phase: ${ph.l} — ${ph.d}
+
+Primary Fracture: ${primaryLeak} — scoring ${w[1]} against a tier benchmark of ${bm.a}.
+Current model: ${C[w[0]].broken} — ${C[w[0]].brokenDesc}.
+Target model: ${C[w[0]].correct} — ${C[w[0]].correctDesc}.
+${s2 && s2[1] <= 50 ? `\nSecondary Fracture: ${secondaryLeak} — scoring ${s2[1]}/100.\nCurrent model: ${C[s2[0]].broken} — ${C[s2[0]].brokenDesc}.\nTarget model: ${C[s2[0]].correct} — ${C[s2[0]].correctDesc}.` : ''}
+
+90-Day Projection: Fix ${primaryLeak}${s2 && s2[1] <= 50 ? ' and ' + C[s2[0]].name : ''} → Score moves from ${ov} to ~${Math.min(ov+25,95)}. Projected revenue impact: 30-50% growth.
+
 --- SECTOR SCORES ---
 ${sorted.map(([k,sc]) => `${C[k].name}: ${sc}/100 [${gL(sc)}]`).join('\n')}
+
+--- CALL PREP NOTES ---
+Spread (highest - lowest): ${sorted[sorted.length-1][1] - sorted[0][1]} points
+${(sorted[sorted.length-1][1] - sorted[0][1]) >= 40 ? 'WIDE SPREAD — single-system problem. Surgical fix. Lead with the weak campaign.' : 'NARROW SPREAD — uniformly weak. Foundational build needed across all campaigns.'}
+Call angle: Lead by asking about ${primaryLeak.toLowerCase()}. They will confirm the data and feel understood.
+${ab ? 'Score is ABOVE tier average — position around optimization and unlocking next level.' : 'Score is BELOW tier average (' + bm.a + ') — this is a high urgency lead. The gap between where they are and where their peers are is the leverage.'}
 
 --- FULL ANSWER LOG ---
 ${answerLog}
@@ -521,12 +537,12 @@ sendToAirtable({
   'Phase': ph.l,
   'Primary Leak': primaryLeak,
   'Secondary Leak': secondaryLeak,
-  'Content Ops': fs.content || 0,
-  'Revenue Ops': fs.revenue || 0,
-  'Audience': fs.audience || 0,
-  'Team': fs.team || 0,
-  'Intelligence': fs.intelligence || 0,
-  'CEO Rhythm': fs.ceo || 0,
+  'Content Engine': fs.content || 0,
+  'Revenue Intelligence': fs.revenue || 0,
+  'Acquisition System': fs.audience || 0,
+  'Delegation Architecture': fs.team || 0,
+  'Decision Infrastructure': fs.intelligence || 0,
+  'Operator Cadence': fs.ceo || 0,
   'Date Taken': new Date().toISOString(),
   'Source': document.referrer || 'direct',
   'Status': 'New',
@@ -558,6 +574,7 @@ el.innerHTML=`
   </div>
   <div style="margin-top:14px"><span style="display:inline-block;padding:5px 18px;border:1.5px solid ${ph.c};font:700 8px/1.4 'Orbitron',sans-serif;letter-spacing:3px;color:${ph.c}">${ph.l}</span></div>
   <p style="max-width:380px;margin:14px auto 0;font-size:12px;line-height:1.65;color:var(--w3);font-weight:300">${ph.d}</p>
+  <p style="max-width:380px;margin:10px auto 0;font:500 8px/1.6 'JetBrains Mono',monospace;letter-spacing:1px;color:${ab?'var(--grn)':'var(--red)'}">Creators at your revenue level average ${bm.a}. Top 10% score ${bm.t}. ${ab?'You\'re above average.':'You\'re below average for your tier.'}</p>
 </div>
 
 <div class="rv" data-s="2"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
@@ -589,8 +606,8 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 <div class="rv" data-s="4"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
 
 <div class="rv" data-s="4"><div class="p p-r" style="padding:24px">${cn}
-  <div class="lb lb-r">Your Biggest Leak</div>
-  <p style="font-size:18px;font-weight:300;line-height:1.3;margin-bottom:12px;color:#fff"><span style="font-weight:600">${C[w[0]].name}</span> is costing you the most.</p>
+  <div class="lb lb-r">Primary Fracture Detected</div>
+  <p style="font-size:18px;font-weight:300;line-height:1.3;margin-bottom:12px;color:#fff"><span style="font-weight:600">${C[w[0]].name}</span> — scoring ${w[1]} against a tier benchmark of ${bm.a}.</p>
   <p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300;margin-bottom:8px">Right now you're running the <span style="color:var(--red);font-weight:600">${C[w[0]].broken}</span> — ${C[w[0]].brokenDesc}.<br>The fix: shift to the <span style="color:var(--grn);font-weight:600">${C[w[0]].correct}</span> — ${C[w[0]].correctDesc}.</p>
   ${s2&&s2[1]<=50?`<p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300">Secondary leak: <span style="color:var(--amb);font-weight:600">${C[s2[0]].name}</span> scoring ${s2[1]}/100.</p>`:''}
 </div></div>
@@ -604,9 +621,9 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 
 <div class="rv" data-s="6"><div class="p" style="padding:40px 26px;text-align:center;animation:glowPulse 3s ease infinite">${cn}
   <div class="lb" style="text-align:center">Next Step</div>
-  <p style="font-size:22px;font-weight:300;line-height:1.2;margin-bottom:8px;color:#fff">Get your fix sequence.</p>
-  <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">45-minute strategy call. We'll diagnose the root cause, build your fix sequence, and map your first 30 days.</p>
-  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px">BOOK YOUR STRATEGY CALL</a>
+  <p style="font-size:22px;font-weight:300;line-height:1.2;margin-bottom:8px;color:#fff">${ov<=40?'See the 90-day exit plan from operator dependency.':ov<=65?'Find out which bottleneck to remove first.':ov<=85?'Get the surgical fix for your specific fractures.':'Unlock the next tier of operational leverage.'}</p>
+  <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">45-minute diagnostic call. We review your score, identify the root cause, and map your first 30 days.</p>
+  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px">BOOK YOUR DIAGNOSTIC CALL</a>
   <p style="font:500 7px/1 'JetBrains Mono',monospace;color:var(--w5);margin-top:16px;letter-spacing:2px">FREE · LIMITED TO 6 SLOTS PER WEEK</p>
 </div></div>
 
