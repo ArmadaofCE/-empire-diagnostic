@@ -57,25 +57,25 @@ body{background:var(--bg);color:var(--w2);font-family:'Sora',sans-serif;-webkit-
 #u-ui{position:relative;z-index:1;text-align:center;width:100%;max-width:420px;padding:0 24px}
 
 .lock-row{display:flex;justify-content:center;gap:5px;margin-bottom:40px}
-.dial{width:48px;height:62px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font:700 26px/1 'Orbitron',sans-serif;color:rgba(255,255,255,.08);transition:all .5s cubic-bezier(.23,1,.32,1)}
+.dial{width:48px;height:62px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font:700 26px/1 'Orbitron',sans-serif;color:rgba(255,255,255,.2);transition:all .5s cubic-bezier(.23,1,.32,1)}
 .dial.spin{animation:dSpin .1s ease}
 .dial.set{color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.04);text-shadow:0 0 25px rgba(255,255,255,.2)}
 .dial.set-grn{color:var(--grn);border-color:var(--grn-b);background:var(--grn-g);text-shadow:0 0 25px rgba(0,232,123,.3)}
 
 .fp{width:120px;height:120px;margin:0 auto 36px;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .fp svg{width:100%;height:100%}
-.fp-trk{fill:none;stroke:rgba(255,255,255,.06);stroke-width:1.5}
+.fp-trk{fill:none;stroke:rgba(255,255,255,.15);stroke-width:1.5}
 .fp-fl{fill:none;stroke:rgba(255,255,255,.6);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1.5s cubic-bezier(.23,1,.32,1)}
 .fp.active .fp-fl{stroke-dashoffset:0}
 .fp .inner{position:absolute;inset:22px;display:flex;align-items:center;justify-content:center;flex-direction:column}
-.fp .ico{width:32px;height:32px;border:1.5px solid rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .6s}
-.fp .ico::after{content:'';width:10px;height:10px;border:1.5px solid rgba(255,255,255,.2);border-radius:50%;transition:all .6s}
+.fp .ico{width:32px;height:32px;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .6s}
+.fp .ico::after{content:'';width:10px;height:10px;border:1.5px solid rgba(255,255,255,.4);border-radius:50%;transition:all .6s}
 .fp.active .ico{border-color:rgba(255,255,255,.5);animation:fpPulse 1s ease infinite}
 .fp.active .ico::after{border-color:rgba(255,255,255,.6)}
 .fp.done .ico{border-color:var(--grn);box-shadow:0 0 20px rgba(0,232,123,.15)}
 .fp.done .ico::after{background:var(--grn);border-color:var(--grn)}
 .fp.done .fp-fl{stroke:var(--grn);filter:drop-shadow(0 0 10px rgba(0,232,123,.3))}
-.fp .st{font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:3.5px;color:rgba(255,255,255,.2);margin-top:6px;transition:all .5s}
+.fp .st{font:600 7px/1 'JetBrains Mono',monospace;letter-spacing:3.5px;color:rgba(255,255,255,.5);margin-top:6px;transition:all .5s}
 .fp.active .st{color:rgba(255,255,255,.5)}
 .fp.done .st{color:var(--grn)}
 
@@ -83,9 +83,9 @@ body{background:var(--bg);color:var(--w2);font-family:'Sora',sans-serif;-webkit-
 .sbar-u.active{opacity:1}
 .sbar-u::after{content:'';position:absolute;width:25%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:sweepH 1.6s linear infinite}
 
-.u-lbl{font:600 7.5px/1 'JetBrains Mono',monospace;letter-spacing:6px;color:rgba(255,255,255,.18);text-transform:uppercase;margin-bottom:10px}
-.u-ttl{font:200 32px/1.1 'Sora',sans-serif;color:rgba(255,255,255,.08);margin-bottom:36px;letter-spacing:.5px}
-.u-msg{font:400 11.5px/1.6 'JetBrains Mono',monospace;color:rgba(255,255,255,.2);letter-spacing:.4px;min-height:18px;transition:all .4s}
+.u-lbl{font:600 7.5px/1 'JetBrains Mono',monospace;letter-spacing:6px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:10px}
+.u-ttl{font:200 32px/1.1 'Sora',sans-serif;color:rgba(255,255,255,.45);margin-bottom:36px;letter-spacing:.5px}
+.u-msg{font:400 11.5px/1.6 'JetBrains Mono',monospace;color:rgba(255,255,255,.5);letter-spacing:.4px;min-height:18px;transition:all .4s}
 .u-msg.g{color:var(--grn);text-shadow:0 0 15px rgba(0,232,123,.15)}
 
 /* ═══ BG ═══ */
