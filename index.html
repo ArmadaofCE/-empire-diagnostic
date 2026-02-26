@@ -320,6 +320,7 @@ el.innerHTML=`<div style="animation:fIn .7s ease">
   <div style="display:flex;flex-direction:column;gap:8px">
     <input id="i-n" class="inp" placeholder="Your name">
     <input id="i-e" class="inp" type="email" placeholder="Best email for your report">
+    <input id="i-s" class="inp" placeholder="Instagram, YouTube, or website (optional)" style="color:var(--w4)">
     <select id="i-r" class="inp" style="color:var(--w5)">
       <option value="" disabled selected>Current monthly revenue</option>
       <option value="10-30k">$10K – $30K / month</option>
@@ -339,13 +340,14 @@ document.getElementById('i-r').addEventListener('change',()=>{document.getElemen
 }
 
 function startQ(){
-uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,rev:document.getElementById('i-r').value};
+uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,rev:document.getElementById('i-r').value,social:document.getElementById('i-s').value||''};
 gtag('event', 'funnel_step', { step: 'assessment_started', revenue_tier: uD.rev });
 // Partial lead capture — save to Airtable even if they don't finish
 sendToAirtable({
   'Name': uD.name,
   'Email': uD.email,
   'Revenue Tier': uD.rev,
+  'Social': uD.social,
   'Status': 'Started',
   'Date Taken': new Date().toISOString(),
   'Source': document.referrer || 'direct',
@@ -554,17 +556,12 @@ ${ab ? 'ABOVE average for tier' : 'BELOW average for tier — high urgency lead'
 sendToAirtable({
   'Name': uD.name,
   'Email': uD.email,
+  'Social': uD.social,
   'Revenue Tier': uD.rev,
   'Overall Score': ov,
   'Phase': ph.l,
   'Primary Leak': primaryLeak,
   'Secondary Leak': secondaryLeak,
-  'Content Engine': fs.content || 0,
-  'Revenue Intelligence': fs.revenue || 0,
-  'Acquisition System': fs.audience || 0,
-  'Delegation Architecture': fs.team || 0,
-  'Decision Infrastructure': fs.intelligence || 0,
-  'Operator Cadence': fs.ceo || 0,
   'Date Taken': new Date().toISOString(),
   'Source': document.referrer || 'direct',
   'Status': 'Completed',
