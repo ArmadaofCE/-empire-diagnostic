@@ -420,28 +420,9 @@ async function sendToAirtable(payload) {
 async function sendToConvertKit(email, name, tags) {
   if (CONFIG.convertkit.apiKey === 'YOUR_CONVERTKIT_API_KEY') { console.warn('[Empire] Kit not configured — skipping'); return; }
   try {
-    // Step 1: Subscribe to form (uses api_key)
-    const subRes = await fetch(`https://api.convertkit.com/v3/forms/${CONFIG.convertkit.formId}/subscribe`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        api_key: CONFIG.convertkit.apiKey,
-        email: email,
-        first_name: name
-      })
-    });
-    const subData = await subRes.json();
-    console.log('[Empire] Kit form subscribe:', subRes.status, JSON.stringify(subData));
-
-    if (!subRes.ok) {
-      console.error('[Empire] Kit subscribe failed:', subData);
-      return;
-    }
-
-    // Step 2: Create tags and subscribe user to each (uses api_secret)
+    // Step 1: Create/apply tags first (api_secret confirms subscriber immediately)
     for (const tagName of tags) {
       try {
-        // Create tag (or get existing) — V3 requires api_secret
         let tagId = null;
         const tagRes = await fetch('https://api.convertkit.com/v3/tags', {
           method: 'POST',
@@ -455,10 +436,8 @@ async function sendToConvertKit(email, name, tags) {
         console.log('[Empire] Kit tag create:', tagName, tagRes.status, JSON.stringify(tagData));
 
         if (tagRes.status === 201) {
-          // New tag created
           tagId = tagData.id;
         } else if (tagRes.status === 422) {
-          // Tag already exists — fetch all tags and find the ID
           const listRes = await fetch(`https://api.convertkit.com/v3/tags?api_key=${CONFIG.convertkit.apiKey}`);
           const listData = await listRes.json();
           const existing = (listData.tags || listData).find(t => t.name === tagName);
@@ -466,20 +445,34 @@ async function sendToConvertKit(email, name, tags) {
           console.log('[Empire] Kit found existing tag:', tagName, tagId);
         }
 
-        // Subscribe email to this tag
         if (tagId) {
           const tSubRes = await fetch(`https://api.convertkit.com/v3/tags/${tagId}/subscribe`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               api_secret: CONFIG.convertkit.apiSecret,
-              email: email
+              email: email,
+              first_name: name
             })
           });
           console.log('[Empire] Kit tag subscribe:', tagName, tSubRes.status);
         }
       } catch (tagErr) { console.error('[Empire] Kit tag error:', tagName, tagErr); }
     }
+
+    // Step 2: Subscribe to form (triggers automation → sequence)
+    const subRes = await fetch(`https://api.convertkit.com/v3/forms/${CONFIG.convertkit.formId}/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        api_secret: CONFIG.convertkit.apiSecret,
+        email: email,
+        first_name: name
+      })
+    });
+    const subData = await subRes.json();
+    console.log('[Empire] Kit form subscribe:', subRes.status, JSON.stringify(subData));
+
     console.log('[Empire] Kit complete — subscriber + tags applied');
   } catch (e) { console.error('[Empire] Kit failed:', e); }
 }
