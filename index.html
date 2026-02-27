@@ -624,6 +624,18 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 
 <div class="rv" data-s="4"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
 
+${ov >= 86 ? `
+<div class="rv" data-s="4"><div class="p p-g" style="padding:24px">${cn}
+  <div class="lb lb-g">Operational Status: Strong</div>
+  <p style="font-size:18px;font-weight:300;line-height:1.3;margin-bottom:12px;color:#fff">All systems scoring <span style="font-weight:600;color:var(--grn)">OPTIMAL</span>.</p>
+  <p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300;margin-bottom:8px">Your operational infrastructure is ahead of ${100 - Math.round((ov - bm.a) / (100 - bm.a) * 100)}% of creators at your revenue level. The question isn't what's broken — it's what's possible when you optimize what's already working.</p>
+  <p style="font-size:12px;line-height:1.7;color:var(--w3);font-weight:300">Relative optimization opportunity: <span style="color:var(--amb);font-weight:600">${C[w[0]].name}</span> at ${w[1]}/100 — your lowest system, but still strong.</p>
+</div></div>
+
+<div class="rv" data-s="5"><div class="p" style="padding:22px 24px;margin-top:18px;border:1px solid rgba(0,232,123,.15)">${cn}
+  <div class="lb lb-g">Scale Opportunity</div>
+  <p style="font-size:13px;line-height:1.7;color:var(--w2);font-weight:300">At your operational level, the next move isn't fixing — it's <span style="font-weight:600">leveraging</span>. Creators at your score typically unlock 2-3x growth by optimizing team capacity, systematizing acquisition, or building scalable revenue architecture. The infrastructure is there. The question is how hard you want to push it.</p>
+</div></div>` : `
 <div class="rv" data-s="4"><div class="p p-r" style="padding:24px">${cn}
   <div class="lb lb-r">Primary Fracture Detected</div>
   <p style="font-size:18px;font-weight:300;line-height:1.3;margin-bottom:12px;color:#fff"><span style="font-weight:600">${C[w[0]].name}</span> — scoring ${w[1]} against a tier benchmark of ${bm.a}.</p>
@@ -634,15 +646,15 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 <div class="rv" data-s="5"><div class="p p-g" style="padding:22px 24px;margin-top:18px">${cn}
   <div class="lb lb-g">90-Day Projection</div>
   <p style="font-size:13px;line-height:1.7;color:var(--w2);font-weight:300">Fix <span style="font-weight:600">${C[w[0]].name}</span>${s2&&s2[1]<=50?' and '+C[s2[0]].name:''} and your score moves from <span style="color:${ph.c};font-family:'Orbitron',sans-serif;font-weight:700">${ov}</span> to <span style="color:var(--grn);font-family:'Orbitron',sans-serif;font-weight:700">${Math.min(ov+25,95)}</span>. Projected revenue impact: <span style="color:var(--grn);font-weight:700">30–50% growth</span> in 90 days.</p>
-</div></div>
+</div></div>`}
 
 <div class="rv" data-s="5"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
 
 <div class="rv" data-s="6"><div class="p" style="padding:40px 26px;text-align:center;animation:glowPulse 3s ease infinite">${cn}
   <div class="lb" style="text-align:center">Next Step</div>
   <p style="font-size:22px;font-weight:300;line-height:1.2;margin-bottom:8px;color:#fff">${ov<=40?'See the 90-day exit plan from operator dependency.':ov<=65?'Find out which bottleneck to remove first.':ov<=85?'Get the surgical fix for your specific fractures.':'Unlock the next tier of operational leverage.'}</p>
-  <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">45-minute diagnostic call. We review your score, identify the root cause, and map your first 30 days.</p>
-  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px" onclick="gtag('event','funnel_step',{step:'diagnostic_call_clicked',score:${ov},phase:'${ph.l}'})">BOOK YOUR DIAGNOSTIC CALL</a>
+  <p style="font-size:12.5px;color:var(--w3);font-weight:300;line-height:1.65;max-width:340px;margin:0 auto 22px">${ov >= 86 ? '45-minute strategy call. We review your operational strengths and map the highest-leverage move for your next phase of growth.' : '45-minute diagnostic call. We review your score, identify the root cause, and map your first 30 days.'}</p>
+  <a href="${calUrl}" target="_blank" class="btn" style="display:inline-block;width:auto;padding:15px 44px;text-decoration:none;font-size:8.5px" onclick="gtag('event','funnel_step',{step:'diagnostic_call_clicked',score:${ov},phase:'${ph.l}'})">${ov >= 86 ? 'BOOK YOUR STRATEGY CALL' : 'BOOK YOUR DIAGNOSTIC CALL'}</a>
   <p style="font:500 7px/1 'JetBrains Mono',monospace;color:var(--w5);margin-top:16px;letter-spacing:2px">FREE · LIMITED TO 6 SLOTS PER WEEK</p>
 </div></div>
 
