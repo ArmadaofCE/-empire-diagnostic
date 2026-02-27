@@ -460,19 +460,6 @@ async function sendToConvertKit(email, name, tags) {
       } catch (tagErr) { console.error('[Empire] Kit tag error:', tagName, tagErr); }
     }
 
-    // Step 2: Subscribe to form (triggers automation → sequence)
-    const subRes = await fetch(`https://api.convertkit.com/v3/forms/${CONFIG.convertkit.formId}/subscribe`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        api_secret: CONFIG.convertkit.apiSecret,
-        email: email,
-        first_name: name
-      })
-    });
-    const subData = await subRes.json();
-    console.log('[Empire] Kit form subscribe:', subRes.status, JSON.stringify(subData));
-
     console.log('[Empire] Kit complete — subscriber + tags applied');
   } catch (e) { console.error('[Empire] Kit failed:', e); }
 }
@@ -562,7 +549,7 @@ sendToAirtable({
 });
 
 // ConvertKit — email + phase tag + revenue tag
-sendToConvertKit(uD.email, uD.name, [phaseTag, `rev-${uD.rev}`, `leak-${w[0]}`]);
+sendToConvertKit(uD.email, uD.name, [phaseTag, `rev-${uD.rev}`, `leak-${w[0]}`, 'assessment-complete']);
 
 // Build Calendly URL with pre-filled context
 const calUrl = getCalendlyUrl(uD.name, uD.email, ov, primaryLeak);
