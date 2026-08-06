@@ -20,7 +20,7 @@ function json(data, status = 200) {
   });
 }
 
-/* ═══ AIRTABLE — same self-healing retry as before, now server-side ═══ */
+/* ═══ AIRTABLE — self-healing retry + typecast for select fields ═══ */
 async function sendToAirtable(payload, attempt = 0) {
   if (!AIRTABLE_TOKEN || !AIRTABLE_BASE_ID) return { skipped: true, reason: 'not configured' };
   const res = await fetch(
@@ -31,7 +31,7 @@ async function sendToAirtable(payload, attempt = 0) {
         Authorization: `Bearer ${AIRTABLE_TOKEN}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ records: [{ fields: payload }] }),
+      body: JSON.stringify({ records: [{ fields: payload }], typecast: true }),
     }
   );
   const data = await res.json();
