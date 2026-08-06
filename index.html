@@ -513,44 +513,32 @@ if(typeof gtag!=='undefined')gtag('event','question_answered',{event_category:'q
 setTimeout(()=>{document.getElementById('qc').classList.add('out');
 setTimeout(()=>{if(cQ<Q.length-1){cQ++;renderQ()}else showResults()},300)},450)}
 
-/* ═══ CONFIGURATION (unchanged) ═══ */
+/* ═══ CONFIGURATION — no secrets live in the browser anymore.
+   Airtable + Kit credentials now live server-side in /api/submit (Vercel env vars). ═══ */
 const CONFIG = {
-  airtable: {
-    token: 'patrgrHRjMeFuLbzp.9c6eea06930d9a2f61935459f24540c59e534a3a2e48c324f380b0e184c0204a',
-    baseId: 'appbBRVglZF40uHQq',
-    table: 'Leads'
-  },
-  convertkit: {
-    apiKey: 'YOUR_CONVERTKIT_API_KEY',
-    formId: 'YOUR_FORM_ID'
-  },
+  submitEndpoint: '/api/submit',
   calendly: 'https://calendly.com/creatorempirediagnostic/empire-strategy-call'
 };
 
-/* ═══ AIRTABLE (unchanged) ═══ */
-async function sendToAirtable(payload){
-  if(CONFIG.airtable.token.includes('YOUR')){console.warn('[Empire] Airtable not configured');return}
-  try{
-    const res=await fetch(`https://api.airtable.com/v0/${CONFIG.airtable.baseId}/${encodeURIComponent(CONFIG.airtable.table)}`,{
-      method:'POST',headers:{'Authorization':`Bearer ${CONFIG.airtable.token}`,'Content-Type':'application/json'},
-      body:JSON.stringify({records:[{fields:payload}]})
+/* ═══ BACKEND SUBMIT — one call to our own serverless endpoint.
+   The endpoint holds the real Airtable + Kit credentials; the browser never sees them.
+   Failure here never blocks the UI — the results page has already rendered by the time this fires. ═══ */
+async function submitLead(lead, email, name, tags) {
+  try {
+    const res = await fetch(CONFIG.submitEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead, email, name, tags })
     });
-    const data=await res.json();
-    if(data.error)console.error('[Empire] Airtable error:',data.error);
-    else console.log('[Empire] Lead saved:',data.records?.[0]?.id);
-  }catch(e){console.error('[Empire] Airtable failed:',e)}
-}
-
-/* ═══ CONVERTKIT / KIT (unchanged) ═══ */
-async function sendToConvertKit(email,name,tags){
-  if(CONFIG.convertkit.apiKey.includes('YOUR')){console.warn('[Empire] ConvertKit not configured');return}
-  try{
-    await fetch(`https://api.convertkit.com/v3/forms/${CONFIG.convertkit.formId}/subscribe`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({api_key:CONFIG.convertkit.apiKey,email,first_name:name,tags})
-    });
-    console.log('[Empire] ConvertKit subscriber added with tags:',tags);
-  }catch(e){console.error('[Empire] ConvertKit failed:',e)}
+    const data = await res.json();
+    if (data.airtable?.error) console.error('[Empire] Airtable error:', data.airtable.error);
+    else if (data.airtable?.id) console.log('[Empire] Lead saved:', data.airtable.id);
+    if (data.kit?.error) console.error('[Empire] Kit error:', data.kit.error);
+    else if (data.kit?.subscriberId) console.log('[Empire] Kit subscriber tagged:', data.kit.subscriberId, data.kit.tags);
+    return data;
+  } catch (e) {
+    console.error('[Empire] Submit failed (network/endpoint unreachable):', e);
+  }
 }
 
 /* ═══ CALENDLY (unchanged) ═══ */
@@ -579,9 +567,7 @@ if(typeof gtag!=='undefined'){
 
 const atPayload={'Name':uD.name,'Email':uD.email,'Revenue Tier':uD.rev,'Overall Score':ov,'Phase':ph.l,'Primary Leak':primaryLeak,'Secondary Leak':secondaryLeak,'Content Ops':fs.content||0,'Revenue Ops':fs.revenue||0,'Audience':fs.audience||0,'Team':fs.team||0,'Intelligence':fs.intelligence||0,'CEO Rhythm':fs.ceo||0,'Date Taken':new Date().toISOString(),'Source':document.referrer||'direct','Status':'New'};
 if(uD.social)atPayload['Social']=uD.social;
-sendToAirtable(atPayload);
-
-sendToConvertKit(uD.email,uD.name,[phaseTag,`rev-${uD.rev}`,`leak-${w[0]}`]);
+submitLead(atPayload,uD.email,uD.name,[phaseTag,`rev-${uD.rev}`,`leak-${w[0]}`]);
 
 const calUrl=getCalendlyUrl(uD.name,uD.email,ov,primaryLeak);
 const sz=192,sw=2.5,r=(sz-sw*2)/2,ci=2*Math.PI*r,ab=ov>=bm.a;
