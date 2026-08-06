@@ -37,7 +37,7 @@ async function sendToAirtable(payload, attempt = 0) {
   const data = await res.json();
   if (data.error) {
     const m = /Unknown field name:\s*\\?"(.+?)\\?"/.exec(data.error.message || '');
-    if (data.error.type === 'UNKNOWN_FIELD_NAME' && m && m[1] in payload && attempt < 5) {
+    if (data.error.type === 'UNKNOWN_FIELD_NAME' && m && m[1] in payload && attempt < 20) {
       const retry = { ...payload };
       delete retry[m[1]];
       return sendToAirtable(retry, attempt + 1);
