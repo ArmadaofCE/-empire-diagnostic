@@ -7,10 +7,12 @@
 <meta name="supported-color-schemes" content="light">
 <title>EMPIRE — CLASSIFIED DIAGNOSTIC</title>
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K36655C2YT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-K36655C2YT');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Chakra+Petch:wght@500;600;700&family=Sora:wght@200;300;400;500;600;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
 --bg:#f7f8f7;--panel:#ffffff;
@@ -19,7 +21,7 @@
 --grn:#00b565;--grn-deep:#067a48;--grn-glow:rgba(0,181,101,.14);--grn-soft:rgba(0,181,101,.06);
 --red:#e03445;--red-soft:rgba(224,52,69,.05);
 --amb:#d98d0b;
---disp:'Chakra Petch',sans-serif;--mono:'JetBrains Mono',monospace;--body:'Sora',sans-serif;
+--serif:'Instrument Serif',Georgia,'Times New Roman',serif;--disp:'JetBrains Mono',ui-monospace,monospace;--mono:'JetBrains Mono',monospace;--body:'Inter Tight',system-ui,-apple-system,sans-serif;
 --ease:cubic-bezier(.19,1,.22,1);
 }
 ::selection{background:rgba(0,181,101,.18);color:var(--ink)}
@@ -56,7 +58,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 @media(max-width:560px){.hud-hide-m{display:none}}
 
 /* ═══ BOTTOM BAR ═══ */
-.sbar{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:7px 18px;display:flex;justify-content:space-between;align-items:center;font:400 7.5px/1 var(--mono);letter-spacing:2.4px;color:var(--ink4);text-transform:uppercase;pointer-events:none;background:linear-gradient(transparent,rgba(247,248,247,.96));opacity:0;transition:opacity 1s}
+.sbar{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:7px 18px;display:flex;justify-content:space-between;align-items:center;font:400 8.5px/1 var(--mono);letter-spacing:2.4px;color:var(--ink4);text-transform:uppercase;pointer-events:none;background:linear-gradient(transparent,rgba(247,248,247,.96));opacity:0;transition:opacity 1s}
 .sbar.v{opacity:1}
 .sbar .dt{width:4px;height:4px;border-radius:50%;background:var(--grn);animation:dotPulse 2.5s ease infinite;margin-right:5px;display:inline-block;vertical-align:middle}
 
@@ -77,14 +79,14 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 #u-ui{position:relative;z-index:1;text-align:center;width:100%;max-width:420px;padding:0 28px}
 
 .u-lbl{font:600 8.5px/1 var(--mono);letter-spacing:6px;color:var(--ink4);text-transform:uppercase;margin-bottom:14px}
-.u-ttl{font:200 32px/1.15 var(--body);color:var(--ink);margin-bottom:44px;letter-spacing:-.5px}
+.u-ttl{font:400 42px/1.05 var(--serif);color:var(--ink);margin-bottom:40px;letter-spacing:-.4px}
 .u-msg{font:400 11.5px/1.6 var(--mono);color:var(--ink4);letter-spacing:.3px;min-height:19px;transition:all .4s}
 .u-msg.g{color:var(--grn-deep)}
 .u-skip{font:500 9px/1 var(--mono);letter-spacing:2.5px;color:var(--ink5);text-transform:uppercase;margin-top:14px;opacity:0;transition:opacity .5s}
 .u-skip.v{opacity:1}
 
 .lock-row{display:flex;justify-content:center;gap:8px;margin-bottom:44px}
-.dial{width:44px;height:56px;background:var(--panel);border:1px solid var(--line);border-radius:3px;display:flex;align-items:center;justify-content:center;font:600 22px/1 var(--disp);color:var(--ink5);transition:all .5s var(--ease)}
+.dial{width:44px;height:56px;background:var(--panel);border:1px solid var(--line);border-radius:3px;display:flex;align-items:center;justify-content:center;font:500 22px/1 var(--disp);color:var(--ink5);transition:all .5s var(--ease)}
 .dial.spin{animation:dSpin .1s ease}
 .dial.set{color:var(--ink);border-color:var(--ink4);box-shadow:0 1px 8px rgba(21,32,26,.06)}
 .dial.set-grn{color:var(--grn-deep);border-color:var(--grn);background:var(--grn-soft);box-shadow:0 0 16px var(--grn-glow)}
@@ -113,7 +115,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .fp-wrap.done .fp-c-fl{stroke:var(--grn);stroke-dashoffset:0}
 
 .fp-status{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);z-index:6;white-space:nowrap}
-.fp-status-text{font:600 7.5px/1 var(--mono);letter-spacing:4px;color:var(--ink4);text-transform:uppercase;transition:all .5s}
+.fp-status-text{font:600 9px/1 var(--mono);letter-spacing:4px;color:var(--ink4);text-transform:uppercase;transition:all .5s}
 .fp-wrap.active .fp-status-text{color:var(--ink2)}
 .fp-wrap.done .fp-status-text{color:var(--grn-deep)}
 
@@ -140,7 +142,7 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 .p-g::before,.p-g::after,.p-g .cb,.p-g .cb2{border-color:var(--grn)!important}
 
 /* ═══ STAMP ═══ */
-.cls-stamp{display:inline-flex;align-items:center;gap:7px;font:600 7.5px/1 var(--mono);letter-spacing:2.8px;color:var(--red);border:1px solid rgba(224,52,69,.35);border-radius:2px;padding:5px 11px;text-transform:uppercase;opacity:.75}
+.cls-stamp{display:inline-flex;align-items:center;gap:7px;font:600 9px/1 var(--mono);letter-spacing:2.8px;color:var(--red);border:1px solid rgba(224,52,69,.35);border-radius:2px;padding:5px 11px;text-transform:uppercase;opacity:.75}
 .lux{display:inline-flex;align-items:center;gap:8px;font:600 9.5px/1.4 var(--mono);letter-spacing:2.8px;color:var(--gold);border:1px solid rgba(168,135,58,.4);background:var(--gold-soft);border-radius:2px;padding:6px 13px;text-transform:uppercase}
 .lux::before,.lux::after{content:'◆';font-size:5px;opacity:.7}
 
@@ -360,9 +362,9 @@ select option{background:#fff;color:var(--ink)}
 
 <script>
 /* ═══════════ DATA (unchanged) ═══════════ */
-const C={content:{name:"Content Engine",broken:"Artist Model",correct:"Factory Model",brokenDesc:"waiting for inspiration, inconsistent output",correctDesc:"batch production, 2+ week content buffer"},revenue:{name:"Revenue Intelligence",broken:"Hope-Based Model",correct:"Math-Based Model",brokenDesc:"winging it, reactive pricing",correctDesc:"data-driven decisions, tracked metrics"},audience:{name:"Acquisition System",broken:"Spray & Pray",correct:"Targeted Acquisition",brokenDesc:"posting everywhere, no funnel",correctDesc:"platform focus, lead magnets, conversion path"},team:{name:"Delegation Architecture",broken:"Freelancer Model",correct:"CEO Model",brokenDesc:"doing everything yourself",correctDesc:"clear roles, documented SOPs"},intelligence:{name:"Decision Infrastructure",broken:"Gut Feel Model",correct:"Data-Driven Model",brokenDesc:"no metrics, reactive",correctDesc:"weekly scorecard, OKRs"},ceo:{name:"Operator Cadence",broken:"Reactive Model",correct:"Proactive Model",brokenDesc:"firefighting, no planning",correctDesc:"recurring meetings, quarterly planning"}};
-const Q=[{c:"content",q:"How would you describe your content creation process?",o:[{t:"I post when inspiration hits — no real schedule",s:15},{t:"I try to be consistent but fall off regularly",s:40},{t:"I batch create with an editorial calendar",s:70},{t:"Full production pipeline with 2+ weeks buffer",s:95}]},{c:"content",q:"Do you have documented SOPs for content creation?",o:[{t:"No — it's all in my head",s:10},{t:"Partial notes, nothing someone else could follow",s:35},{t:"Yes — someone could replicate my process from the docs",s:80},{t:"Fully documented and delegated to a team member",s:100}]},{c:"revenue",q:"How do you make your biggest money decisions?",o:[{t:"Intuition — 'this feels right'",s:15},{t:"Some data, but mostly gut feel",s:40},{t:"I track key metrics and use data for most decisions",s:75},{t:"Completely math-based — I know my CAC, LTV, and margins cold",s:100}]},{c:"revenue",q:"What percentage of your revenue is recurring or predictable?",o:[{t:"0–25% — mostly one-time or launch-based",s:20},{t:"26–50% — some recurring but unpredictable",s:45},{t:"51–75% — majority recurring",s:75},{t:"76–100% — highly predictable month over month",s:100}]},{c:"audience",q:"How would you describe your audience growth strategy?",o:[{t:"Post and pray — no real strategy",s:10},{t:"Active on multiple platforms but spreading thin",s:30},{t:"Focused on 1–2 platforms with a lead magnet and email list",s:70},{t:"Full funnel — platform → lead magnet → nurture → convert",s:95}]},{c:"team",q:"How many hours per week do YOU spend on admin and operations?",o:[{t:"31–40+ hours — I basically am the business",s:10},{t:"21–30 hours — doing most things myself",s:30},{t:"11–20 hours — I have help but I'm still the bottleneck",s:60},{t:"0–10 hours — my team handles it",s:95}]},{c:"team",q:"Does your team have clearly documented roles and responsibilities?",o:[{t:"No team or no documentation at all",s:10},{t:"I have help but they always have to ask me what to do",s:30},{t:"Partial documentation — some things are covered",s:60},{t:"Fully documented — my team operates independently",s:95}]},{c:"intelligence",q:"Do you track key business metrics on a weekly basis?",o:[{t:"No — honestly not sure what my numbers are",s:10},{t:"I check revenue occasionally",s:30},{t:"I track revenue and a few other metrics monthly",s:55},{t:"Weekly scorecard with 5–10 KPIs I review religiously",s:95}]},{c:"ceo",q:"How do you plan your weeks, months, and quarters?",o:[{t:"I don't — I react to whatever's most urgent",s:10},{t:"Loose weekly plan that I rarely follow through on",s:30},{t:"Solid weekly rhythm but no quarterly planning",s:60},{t:"Weekly rhythm + quarterly rocks + annual vision — all connected",s:95}]},{c:"ceo",q:"When an unexpected problem hits your business, what happens?",o:[{t:"I drop everything and firefight until it's solved",s:10},{t:"I stress about it and handle it reactively",s:30},{t:"I log it and address it in my next planning session",s:70},{t:"My team flags it, we do root cause analysis, and build a system to prevent it",s:95}]}];
-const BM={"10-30k":{a:38,t:62},"30-50k":{a:47,t:71},"50-100k":{a:56,t:78},"100-150k":{a:64,t:85},"150k+":{a:72,t:91}};
+const C={content:{name:"Content Engine",broken:"Invisible Expert",correct:"Authority Engine",brokenDesc:"known only through referrals, sporadic publishing",correctDesc:"consistent visibility that brings inbound leads"},revenue:{name:"Revenue Intelligence",broken:"Hourly Model",correct:"Value Model",brokenDesc:"pricing by time or by feel",correctDesc:"pricing from your margins, the value delivered, and your real numbers"},audience:{name:"Acquisition System",broken:"Referral Roulette",correct:"Pipeline Model",brokenDesc:"waiting on referrals, feast or famine",correctDesc:"a pipeline you control, tracked from lead to client"},team:{name:"Delegation Architecture",broken:"Founder-as-Business",correct:"Business Model",brokenDesc:"every engagement runs through you",correctDesc:"documented delivery that your team and AI agents run"},intelligence:{name:"Decision Infrastructure",broken:"Gut Feel Model",correct:"Scorecard Model",brokenDesc:"no weekly numbers, reactive decisions",correctDesc:"a weekly scorecard of pipeline, utilization, margin, and cash"},ceo:{name:"Operator Cadence",broken:"Reactive Model",correct:"Proactive Model",brokenDesc:"firefighting, no planning",correctDesc:"a weekly operating rhythm and quarterly priorities"}};
+const Q=[{c:"content",q:"How do prospective clients see your expertise between referrals?",o:[{t:"They mostly don't — I rarely post or publish",s:15},{t:"I post when I have time, with no real rhythm",s:40},{t:"I publish consistently on one platform",s:70},{t:"Consistent publishing that brings in inbound leads I can track",s:95}]},{c:"content",q:"Could someone else turn your ideas into published content?",o:[{t:"No — it all lives in my head",s:10},{t:"Rough notes, nothing someone could run with",s:35},{t:"Yes — my process is documented",s:80},{t:"A team member or AI workflow produces it; I approve",s:100}]},{c:"revenue",q:"How do you set your prices?",o:[{t:"By feel, or by matching what others charge",s:15},{t:"By the hour or a day rate",s:35},{t:"By project or retainer, roughly tied to value",s:70},{t:"From my margins and the value delivered — I know my numbers cold",s:100}]},{c:"revenue",q:"How much of your revenue comes from retainers or recurring work?",o:[{t:"0–25% — mostly one-off projects",s:20},{t:"26–50% — some retainers, still unpredictable",s:45},{t:"51–75% — majority recurring",s:75},{t:"76–100% — highly predictable month to month",s:100}]},{c:"audience",q:"Where do new clients come from?",o:[{t:"Referrals, whenever they happen",s:10},{t:"Referrals plus occasional outreach",s:30},{t:"One channel I control and track",s:70},{t:"A predictable pipeline — I know my lead-to-client rate",s:95}]},{c:"team",k:"admin",q:"How many hours a week do YOU spend on admin, proposals, scheduling, and operations?",o:[{t:"31–40+ hours — I basically am the business",s:10},{t:"21–30 hours — doing most of it myself",s:30},{t:"11–20 hours — I have help, but I'm still the bottleneck",s:60},{t:"0–10 hours — my team or systems handle it",s:95}]},{c:"team",q:"Who delivers your client work?",o:[{t:"I deliver all of it personally",s:10},{t:"Mostly me, with contractors on pieces",s:30},{t:"My team delivers; I review everything",s:60},{t:"My team delivers from a documented process, without me",s:95}]},{c:"intelligence",q:"Do you track your business's numbers every week?",o:[{t:"No — honestly not sure what my numbers are",s:10},{t:"I check revenue occasionally",s:30},{t:"Revenue and a few metrics, monthly",s:55},{t:"A weekly scorecard: pipeline, utilization, margin, cash",s:95}]},{c:"ceo",q:"How do you plan your weeks, months, and quarters?",o:[{t:"I don't — I react to whatever's most urgent",s:10},{t:"A loose weekly plan I rarely follow through on",s:30},{t:"A solid weekly rhythm, but no quarterly planning",s:60},{t:"Weekly rhythm + quarterly priorities + annual vision, all connected",s:95}]},{c:"ceo",q:"When an unexpected problem hits your business, what happens?",o:[{t:"I drop everything and firefight until it's solved",s:10},{t:"I stress about it and handle it reactively",s:30},{t:"I log it and address it in my next planning session",s:70},{t:"My team flags it, we find the root cause, and build a system to prevent it",s:95}]}];
+const BM={"under-20k":{a:38,t:62},"20-40k":{a:45,t:69},"40-60k":{a:50,t:74},"60-80k":{a:55,t:77},"80-150k":{a:62,t:83},"150k+":{a:72,t:91}};
 
 function gP(s){return s<=40?{l:"OPERATOR EMBEDDED",c:"#e03445",d:"You are the operating system. Every function runs through you. Revenue exists because you show up. Remove you for 30 days and the business stalls. This is how every operator-built business starts. The problem is you have outgrown it and the machine underneath you has not caught up."}:s<=65?{l:"GROWTH BOTTLENECK",c:"#d98d0b",d:"Revenue is working. Growth is happening. But you cannot scale because you are the bottleneck on too many decisions. Your team escalates everything to you because there are no frameworks, no SOPs, and no decision authority below you. You built something real. Now the infrastructure needs to match the revenue."}:s<=85?{l:"SYSTEM FRACTURES",c:"#38443e",d:"Most of your operations are functional. But 1-2 specific systems are significantly weaker than the rest. These fractures are the precise reason you are plateaued. Every dollar of growth pressure hits the weakest system first. Fix the fractures and the ceiling lifts."}:{l:"OPTIMIZATION READY",c:"#00b565",d:"Your operational infrastructure is strong across the board. The question is not what is broken — it is what is possible when every system runs at 95%+. At your level, small optimizations in pricing, delegation, or acquisition compound into significant revenue and time gains."}}
 function gC(s){return s<=40?"#e03445":s<=65?"#d98d0b":s<=85?"#38443e":"#00b565"}
@@ -373,50 +375,79 @@ const cn='<div class="cb"></div><div class="cb2"></div><div class="shim"></div>'
 /* ═══ Clocks ═══ */
 setInterval(()=>{const d=new Date();const t=d.toLocaleTimeString('en-US',{hour12:false})+'.'+String(d.getMilliseconds()).padStart(3,'0').slice(0,2);const ck=document.getElementById('clk');if(ck)ck.textContent=t;const h=document.getElementById('hud-clk');if(h)h.textContent=t.slice(0,8)},80);
 
-/* ═══ PROSPERITY FIELD — unlock screen: currencies rising ═══ */
-!function(){try{const cv=document.getElementById('u-canvas'),x=cv&&cv.getContext('2d');if(!x||!x.createRadialGradient)return;
-let W,H;function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
-const SYMS=['$','€','£','¥','₿','₹','₩','₽','₺','₪','₫','₦','₱','฿','¢','€','$','£'];
-const CREDITS=['+$2,400','+$12,850','+$5,300','+$847','+$31,200','+$9,675'];
-const GRN=[0,150,88], GLD=[168,135,58], INK=[45,57,52];
-function spawn(init){
-  const isCredit=Math.random()<.14;
-  const col=Math.random()<.62?GRN:(Math.random()<.55?GLD:INK);
-  return{
-    txt:isCredit?CREDITS[Math.floor(Math.random()*CREDITS.length)]:SYMS[Math.floor(Math.random()*SYMS.length)],
-    credit:isCredit,
-    x:Math.random()*(W||400),
-    y:init?Math.random()*(H||800):(H||800)+30,
-    sp:.22+Math.random()*.5,            // rise speed
-    sway:Math.random()*1.4+.6,          // horizontal drift amplitude
-    ph:Math.random()*6.28,
-    sz:isCredit?10+Math.random()*3:15+Math.random()*13,  // clearly visible sizes
-    a:0,                                 // fades in
-    peak:.10+Math.random()*.12,          // visible but refined
-    col
-  }}
-const parts=[];const N=20;for(let i=0;i<N;i++)parts.push(spawn(true));
-let t=0;
-!function draw(){t+=.016;x.clearRect(0,0,W,H);
-parts.forEach((p,i)=>{
-  p.y-=p.sp;
-  const px=p.x+Math.sin(t*p.sway+p.ph)*14;
-  // fade in near bottom, fade out near top — ascent feels continuous
-  const prog=1-(p.y/(H||800));
-  p.a=Math.min(p.peak, prog<.12?prog/.12*p.peak : p.y<H*.22?Math.max(0,(p.y/(H*.22)))*p.peak : p.peak);
-  if(p.y<-40){parts[i]=spawn(false);return}
-  const[r,g,b]=p.col;
-  x.font=`${p.credit?'600 ':''}${p.sz}px ${p.credit?'"JetBrains Mono",monospace':'"Sora","Helvetica Neue",sans-serif'}`;
-  // soft glow under green symbols — prosperity halo
-  if(p.col===GRN&&p.sz>20){
-    const gr=x.createRadialGradient(px,p.y,0,px,p.y,p.sz*1.4);
-    gr.addColorStop(0,`rgba(0,181,101,${p.a*.35})`);gr.addColorStop(1,'rgba(0,181,101,0)');
-    x.fillStyle=gr;x.beginPath();x.arc(px,p.y,p.sz*1.4,0,Math.PI*2);x.fill();
-  }
-  x.fillStyle=`rgba(${r},${g},${b},${p.a})`;
-  x.fillText(p.txt,px,p.y);
-});
-if(!document.getElementById('unlock').classList.contains('out'))requestAnimationFrame(draw)}()
+/* ═══ THE TURNAROUND — unlock screen: profit leaks below breakeven, then turns around and shoots up when they authenticate ═══ */
+!function(){try{const cv=document.getElementById('u-canvas'),x=cv&&cv.getContext('2d');if(!x)return;
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,dpr;function rs(){dpr=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+'px';cv.style.height=H+'px';x.setTransform(dpr,0,0,dpr,0,0)}rs();addEventListener('resize',rs);
+const GOLD='168,135,58',INK='38,52,45',RED='224,52,69',GRN='0,181,101',GRD='6,122,72',MONO='"JetBrains Mono",ui-monospace,monospace';
+const LOW=-6240,V90=22000,HIGH=100000,TURN=.42,KNEE=.9;
+const ss=(a,b,u)=>{const k=Math.max(0,Math.min(1,(u-a)/(b-a)));return k*k*(3-2*k)};
+function val(u){if(u<=TURN)return 600-(600-LOW)*ss(0,TURN,u)+Math.sin(u*38)*160*(1-u/TURN);
+  if(u<=KNEE){const k=(u-TURN)/(KNEE-TURN);return LOW+(V90-LOW)*Math.pow(k,1.8)}
+  const m=(u-KNEE)/(1-KNEE);return V90+(HIGH-V90)*Math.pow(m,2.2)}
+const MARKS=[{u:.16,txt:'−$1,240'},{u:.30,txt:'−$3,860'},{u:TURN,txt:'−$6,240 · LEAK',lead:1},{u:.773,txt:'+$9,970 / MO',gold:1},{u:.932,txt:'+$29,920 / QTR',gold:1,side:1},{u:1,txt:'+$100K+ / YR',gold:1,lead:1,peak:1}];
+const fmt=v=>(v<0?'−':'+')+'$'+Math.abs(Math.round(v/10)*10).toLocaleString('en-US');
+let t=0,p=0,pS=0,turned=false,turnT=0,peakT=-1,last=performance.now(),outT=-1,nextB=0;const bubs=[];
+/* phase track on the breakeven axis: what is happening at each stretch of the curve */
+const PH=[{u:0,g:'◉',t:'BREAKEVEN',n:'BREAKEVEN',c:INK,up:1,al:'left'},{u:.26,g:'▼',t:'PROFIT LEAKING',n:'LEAK',c:RED,up:1},{u:TURN,g:'⌖',t:'DIAGNOSED',n:'DIAGNOSED',c:GOLD,up:1,turn:1},
+  {u:.627,g:'⚙',t:'SYSTEMS INSTALLED',n:'SYSTEMS',c:GOLD,al:'left',dx:6},{u:.78,g:'◈',t:'AGENTS LIVE',n:'AGENTS',c:GOLD,al:'left',dx:6},{u:KNEE,g:'▲',t:'COMPOUNDING',n:'COMPOUND',c:GRD,al:'right',row2:1}];
+function geo(){const narrow=W<600;return{x0:W*(narrow?.06:.14),x1:W*(narrow?.92:.84),y0:H*.80,sNeg:(H*.11)/-LOW,sPos:(H*.60)/HIGH,narrow}}
+function pt(u,g){const v=val(u);return[g.x0+(g.x1-g.x0)*Math.min(u/KNEE,1),g.y0-v*(v<0?g.sNeg:g.sPos)]}
+function frame(){const now=performance.now();t+=Math.min(.05,(now-last)/1000);last=now;x.clearRect(0,0,W,H);const g=geo();
+  if(!turned&&document.querySelector('#fp.active, .dial.set')){turned=true;turnT=t;pS=p}
+  if(reduce)p=turned?1:TURN;
+  else if(!turned)p=Math.min(TURN,t/4.2*TURN);
+  else{const k=Math.min(1,(t-turnT)/3);p=pS+(1-pS)*(k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2)}  // one continuous ease: accelerates through the turn, glides to a stop at the top
+  if(p>=1&&peakT<0){peakT=t;bubs.push({b:t,R:17,ph:0,amp:5,main:1});nextB=t+.35}
+  if(peakT>=0&&t>=nextB&&bubs.length<9){bubs.push({b:t,R:5+Math.random()*5,ph:Math.random()*6,amp:4+Math.random()*6,dx:(Math.random()-.5)*22});nextB=t+.28+Math.random()*.3}
+  // breakeven axis + negative zone
+  x.setLineDash([3,5]);x.strokeStyle=`rgba(${INK},.18)`;x.lineWidth=1;x.beginPath();x.moveTo(g.x0,g.y0);x.lineTo(g.x1,g.y0);x.stroke();x.setLineDash([]);
+  const zg=x.createLinearGradient(0,g.y0,0,g.y0+H*.14);zg.addColorStop(0,`rgba(${RED},.035)`);zg.addColorStop(1,`rgba(${RED},0)`);x.fillStyle=zg;x.fillRect(g.x0,g.y0,g.x1-g.x0,H*.14);
+  // the line, red below breakeven, gold above
+  const STEPS=900,N=Math.max(2,Math.floor(STEPS*p));let prev=pt(0,g),pv=val(0);x.lineCap='round';
+  for(let i=1;i<=N;i++){const u=i/STEPS,c=pt(u,g),v=val(u);const neg=(v+pv)/2<0;x.lineWidth=u>KNEE?2.2:1.6;x.strokeStyle=`rgba(${neg?RED:GOLD},${neg?.55:.85})`;x.beginPath();x.moveTo(prev[0],prev[1]);x.lineTo(c[0],c[1]);x.stroke();prev=c;pv=v}
+  {const c=pt(p,g);if(N<STEPS*p){x.lineWidth=p>KNEE?2.2:1.6;x.strokeStyle=`rgba(${val(p)<0?RED:GOLD},.85)`;x.beginPath();x.moveTo(prev[0],prev[1]);x.lineTo(c[0],c[1]);x.stroke();prev=c}}
+  if(p>TURN){x.beginPath();x.moveTo(pt(TURN,g)[0],g.y0);for(let i=Math.floor(TURN*STEPS);i<=N;i++){const c=pt(i/STEPS,g);x.lineTo(c[0],Math.min(c[1],g.y0))}x.lineTo(prev[0],g.y0);x.closePath();
+    const fg=x.createLinearGradient(0,H*.1,0,g.y0);fg.addColorStop(0,`rgba(${GOLD},.16)`);fg.addColorStop(1,`rgba(${GOLD},0)`);x.fillStyle=fg;x.fill()}
+  // markers, in sequence
+  MARKS.forEach(m=>{if(p+.001<m.u)return;if(g.narrow&&!m.lead&&m.u!==.55&&!m.side)return;const[mx,my]=pt(m.u,g);const col=m.gold?GOLD:RED;
+    x.fillStyle=`rgba(${m.peak?GRN:col},.9)`;x.beginPath();x.arc(mx,my,m.peak?3.6:2.2,0,6.283);x.fill();
+    if(m.peak){const pk=Math.min(1,(t-peakT)/.5);x.font=`800 ${(12+6*pk*pk*(3-2*pk)).toFixed(2)}px ${MONO}`;x.textAlign='right';x.fillStyle=`rgba(${GRD},${.45+.55*pk})`;x.fillText(m.txt,mx-22,my+6);return}
+    x.font=`${m.lead?600:500} ${m.lead?11:10}px ${MONO}`;
+    if(m.side){x.textAlign='right';x.fillStyle=`rgba(${col},.65)`;x.fillText(m.txt,mx-12,my+4);return}
+    x.textAlign=mx>W*.7?'right':'center';x.fillStyle=`rgba(${col},${m.lead?.85:.55})`;x.fillText(m.txt,mx,m.gold?my-12:my+18)});
+  // phase track: tick on the axis, glyph + label; fades in as the tip reaches it, current phase brightest
+  let cur=-1;PH.forEach((f,i)=>{if(p+.001>=f.u&&(!f.turn||turned))cur=i});
+  PH.forEach((f,i)=>{if(i>cur)return;const fx=g.x0+(g.x1-g.x0)*Math.min(f.u/KNEE,1);const a=i===cur?.95:.5;
+    x.strokeStyle=`rgba(${f.c},${a*.7})`;x.lineWidth=1;x.beginPath();x.moveTo(fx,g.y0-4);x.lineTo(fx,g.y0+4);x.stroke();
+    x.font=`${i===cur?700:600} 9px ${MONO}`;x.textAlign=f.al||'center';x.fillStyle=`rgba(${f.c},${a})`;
+    const ty=f.up?g.y0-9:g.y0+(f.row2?32:18);x.fillText(f.g+' '+(g.narrow?f.n:f.t),fx+(f.dx||0),ty)});
+  // live tip
+  const[tx,ty]=pt(p,g);const v=val(p),neg=v<0,col=peakT>=0?GRN:neg?RED:GOLD,br=neg&&!turned?.75+Math.sin(t*3)*.25:1,rad=p>KNEE?26:18;
+  const gl=x.createRadialGradient(tx,ty,0,tx,ty,rad);gl.addColorStop(0,`rgba(${col},${.5*br})`);gl.addColorStop(1,`rgba(${col},0)`);x.fillStyle=gl;x.beginPath();x.arc(tx,ty,rad,0,6.283);x.fill();
+  x.fillStyle=`rgba(${col},.95)`;x.beginPath();x.arc(tx,ty,3,0,6.283);x.fill();
+  // HUD tracking: dashed drop line to the axis + corner brackets locked on the tip (green lock at the peak)
+  const lock=peakT>=0?Math.min(1,(t-peakT)/.5):0,rc=lock?GRN:col;
+  x.setLineDash([2,4]);x.strokeStyle=`rgba(${rc},.28)`;x.lineWidth=1;x.beginPath();x.moveTo(tx,ty+6);x.lineTo(tx,g.y0);x.stroke();x.setLineDash([]);
+  {const b=11+3*Math.sin(t*4)*(1-lock)+4*lock,L=4;x.strokeStyle=`rgba(${rc},${.6+.3*lock})`;x.lineWidth=1.2;x.beginPath();
+   [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx,sy])=>{x.moveTo(tx+sx*b,ty+sy*(b-L));x.lineTo(tx+sx*b,ty+sy*b);x.lineTo(tx+sx*(b-L),ty+sy*b)});x.stroke()}
+  if(p<1&&!(p>=TURN&&!turned)&&(p>KNEE||!MARKS.some(m=>Math.abs(m.u-p)<.07))){x.font=`${p>KNEE?700:600} ${p>KNEE?13:10}px ${MONO}`;x.textAlign='right';x.fillStyle=`rgba(${col},${.8*Math.min(1,(1-p)/.02)})`;x.fillText(fmt(v),tx-12,ty-8)}
+  // peak burst: one expanding ring + rising sparks
+  if(peakT>=0){const k=Math.min(1,(t-peakT)/1.1);const[px,py]=pt(1,g);x.strokeStyle=`rgba(${GRN},${.5*(1-k)})`;x.lineWidth=1.4;x.beginPath();x.arc(px,py,6+k*52,0,6.283);x.stroke()}
+  // $ bubbles: the peak becomes a dollar bubble that floats to the top, smaller ones keep rising after it
+  if(peakT>=0){const[px,py]=pt(1,g);
+    for(let i=bubs.length-1;i>=0;i--){const b=bubs[i],a=t-b.b,grow=Math.min(1,a/.45),r=b.R*(1-Math.pow(1-grow,3));
+      const by=py-(b.main?8:0)-(b.main?30*a+45*a*a:38*a+70*a*a),bx=px+(b.dx||0)*Math.min(1,a)+Math.sin(a*2.4+b.ph)*b.amp*Math.min(1,a*1.5);
+      if(by<-b.R*2){bubs.splice(i,1);continue}
+      const fade=Math.min(1,Math.max(0,(by+b.R)/60))*(b.main?1:.8);if(r<.5)continue;
+      const bg=x.createRadialGradient(bx-r*.35,by-r*.35,r*.1,bx,by,r);bg.addColorStop(0,`rgba(255,255,255,${.75*fade})`);bg.addColorStop(.55,`rgba(${GRN},${.10*fade})`);bg.addColorStop(1,`rgba(${GRN},${.24*fade})`);
+      x.fillStyle=bg;x.beginPath();x.arc(bx,by,r,0,6.283);x.fill();
+      x.strokeStyle=`rgba(${GRN},${.7*fade})`;x.lineWidth=b.main?1.4:1;x.stroke();
+      x.strokeStyle=`rgba(255,255,255,${.9*fade})`;x.lineWidth=1.2;x.beginPath();x.arc(bx,by,r*.68,3.5,4.4);x.stroke();
+      x.font=`700 ${(r*1.15).toFixed(2)}px ${MONO}`;x.textAlign='center';x.textBaseline='middle';x.fillStyle=`rgba(${GRD},${.95*fade})`;x.fillText('$',bx,by+r*.04);x.textBaseline='alphabetic'}}
+  const out=document.getElementById('unlock').classList.contains('out');if(out&&outT<0)outT=t;
+  if(!reduce&&(!out||t-outT<.7))requestAnimationFrame(frame)}
+frame();
 }catch(e){console.warn('[Empire] bg animation unavailable:',e)}}();
 
 /* ═══ Unlock sequence — same ritual, ~4s tempo.
@@ -473,27 +504,42 @@ el.innerHTML=`<div style="animation:fIn .7s ease">
 <div style="text-align:center;margin-bottom:48px">
   <div class="lux" style="margin-bottom:20px">Clearance Granted</div>
   <div style="font:600 8.5px/1 var(--mono);letter-spacing:5px;color:var(--ink4);text-transform:uppercase;margin-bottom:18px">// Empire Operating System</div>
-  <h1 style="font-size:clamp(30px,6.5vw,46px);font-weight:200;line-height:1.08;color:var(--ink);letter-spacing:-1px">Operational<br><span style="font-weight:700;color:var(--grn-deep)">Diagnostic</span></h1>
+  <h1 style="font:400 clamp(44px,9.5vw,62px)/1 var(--serif);color:var(--ink);letter-spacing:-.6px">Operational<br><span style="font-style:italic;color:var(--grn-deep)">Diagnostic</span></h1>
   <div style="width:44px;height:2px;background:var(--grn);margin:22px auto"></div>
-  <p style="font-size:15px;line-height:1.7;color:var(--ink3);max-width:400px;margin:0 auto;font-weight:300">The 3-minute intelligence scan that shows you exactly where your business is leaking money.</p>
+  <p style="font-size:15px;line-height:1.7;color:var(--ink3);max-width:400px;margin:0 auto;font-weight:300">Your business can only grow as far as your calendar. This 3-minute scan shows where your hours and margin are leaking, and what it's costing you each month.</p>
 </div>
 <div class="p" style="margin-bottom:20px">${cn}
   <div class="lb">What You'll Get</div>
-  ${["Your Empire Operating Score across 6 critical operational areas","The #1 operational leak costing you the most revenue and time","How you compare to other operators at your revenue tier","Your primary and secondary leaks — and the shift that fixes each one","Your score potential once those leaks are resolved"].map((t,i)=>`<div style="display:flex;align-items:flex-start;gap:13px;padding:7px 0;opacity:0;animation:oIn .3s ease ${.1+i*.07}s forwards"><span style="color:var(--grn-deep);font:600 11px/1.5 var(--disp);flex-shrink:0">0${i+1}</span><p style="font:300 14px/1.55 var(--body);color:var(--ink2)">${t}</p></div>`).join('')}
+  ${["Your Empire Operating Score across six operating systems","Your estimated monthly profit leak, in dollars","Your calendar ceiling: the hours your business can't grow past","Your primary and secondary leaks, and the shift that fixes each one","Where you stand against the reference points for your revenue tier"].map((t,i)=>`<div style="display:flex;align-items:flex-start;gap:13px;padding:7px 0;opacity:0;animation:oIn .3s ease ${.1+i*.07}s forwards"><span style="color:var(--grn-deep);font:600 11px/1.5 var(--disp);flex-shrink:0">0${i+1}</span><p style="font:300 14px/1.55 var(--body);color:var(--ink2)">${t}</p></div>`).join('')}
 </div>
 <div class="p" style="padding:32px 30px">${cn}
   <div class="lb">Begin Diagnostic</div>
   <div style="display:flex;flex-direction:column;gap:10px">
     <input id="i-n" class="inp" placeholder="Your name">
     <input id="i-e" class="inp" type="email" placeholder="Best email for your report">
-    <input id="i-s" class="inp" placeholder="Instagram, YouTube, or website (optional)">
+    <input id="i-s" class="inp" placeholder="LinkedIn or website (optional)">
     <select id="i-r" class="inp" style="color:var(--ink4)">
       <option value="" disabled selected>Current monthly revenue</option>
-      <option value="10-30k">$10K – $30K / month</option>
-      <option value="30-50k">$30K – $50K / month</option>
-      <option value="50-100k">$50K – $100K / month</option>
-      <option value="100-150k">$100K – $150K / month</option>
+      <option value="under-20k">Under $20K / month</option>
+      <option value="20-40k">$20K – $40K / month</option>
+      <option value="40-60k">$40K – $60K / month</option>
+      <option value="60-80k">$60K – $80K / month</option>
+      <option value="80-150k">$80K – $150K / month</option>
       <option value="150k+">$150K+ / month</option>
+    </select>
+    <select id="i-h" class="inp" style="color:var(--ink4)">
+      <option value="" disabled selected>Hours you work per week</option>
+      <option value="35">Under 40 hours / week</option>
+      <option value="45">40 – 50 hours / week</option>
+      <option value="55">50 – 60 hours / week</option>
+      <option value="65">60+ hours / week</option>
+    </select>
+    <select id="i-d" class="inp" style="color:var(--ink4)">
+      <option value="" disabled selected>Share of those hours on client delivery</option>
+      <option value="0.2">Under 25% on delivery</option>
+      <option value="0.4">25% – 50% on delivery</option>
+      <option value="0.6">50% – 75% on delivery</option>
+      <option value="0.85">Over 75% on delivery</option>
     </select>
     <button id="btn-go" class="btn" disabled onclick="startQ()">RUN DIAGNOSTIC</button>
   </div>
@@ -503,14 +549,14 @@ el.innerHTML=`<div style="animation:fIn .7s ease">
   <div style="font:400 9.5px/1.5 var(--mono);color:var(--ink4);letter-spacing:2.2px">TAKES 3 MINUTES · PRIVATE &amp; CONFIDENTIAL</div>
 </div>
 </div>`;
-const v=()=>{const n=document.getElementById('i-n').value,e=document.getElementById('i-e').value,r=document.getElementById('i-r').value;document.getElementById('btn-go').disabled=!(n&&e&&r)};
+const v=()=>{const g=id=>document.getElementById(id).value;document.getElementById('btn-go').disabled=!(g('i-n')&&g('i-e')&&g('i-r')&&g('i-h')&&g('i-d'))};
 ['i-n','i-e'].forEach(id=>document.getElementById(id).addEventListener('input',v));
-document.getElementById('i-r').addEventListener('change',()=>{document.getElementById('i-r').style.color='var(--ink)';v()})
+['i-r','i-h','i-d'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{document.getElementById(id).style.color='var(--ink)';v()}))
 }
 
 /* ═══ QUIZ ═══ */
 function startQ(){
-uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,social:document.getElementById('i-s').value.trim(),rev:document.getElementById('i-r').value};
+uD={name:document.getElementById('i-n').value,email:document.getElementById('i-e').value,social:document.getElementById('i-s').value.trim(),rev:document.getElementById('i-r').value,hrs:+document.getElementById('i-h').value,del:+document.getElementById('i-d').value};
 if(typeof gtag!=='undefined')gtag('event','quiz_started',{event_category:'engagement',revenue_tier:uD.rev});
 ans=[];cQ=0;document.getElementById('s-intro').style.display='none';
 document.getElementById('s-quiz').style.display='block';renderQ()}
@@ -525,7 +571,7 @@ document.getElementById('s-quiz').innerHTML=`<div class="qc" id="qc">
   <div class="lb" style="margin:0">${camp.name}</div>
   <div style="font:500 9.5px/1 var(--mono);color:var(--ink4);letter-spacing:1px">${String(cQ+1).padStart(2,'0')} / ${Q.length}</div>
 </div>
-<h2 style="font-size:20px;font-weight:400;line-height:1.5;margin-bottom:28px;color:var(--ink)">${q.q}</h2>
+<h2 style="font:400 25px/1.28 var(--serif);letter-spacing:-.2px;margin-bottom:28px;color:var(--ink)">${q.q}</h2>
 <div style="display:flex;flex-direction:column;gap:8px">
 ${q.o.map((o,i)=>`<div class="or"><div class="opt" onclick="pick(${i})"><p style="font-size:14px;color:var(--ink2);font-weight:300;line-height:1.55">${o.t}</p></div></div>`).join('')}
 </div></div>`}
@@ -544,7 +590,7 @@ setTimeout(()=>{if(cQ<Q.length-1){cQ++;renderQ()}else showResults()},300)},450)}
 const CONFIG = {
   submitEndpoint: '/api/submit',
   calendly: 'https://calendly.com/creatorempirediagnostic/empire-strategy-call',     // Empire Discovery Call (free, 20 min)
-  diagnostic: 'https://calendly.com/creatorempirediagnostic/empire-diagnostic-session' // $997 Diagnostic Session (75 min)
+  diagnostic: 'https://calendly.com/creatorempirediagnostic/empire-diagnostic-session' // $1,497 Empire Diagnostic (75 min)
 };
 
 /* ═══ BACKEND SUBMIT — one call to our own serverless endpoint.
@@ -569,7 +615,7 @@ async function submitLead(lead, email, name, tags) {
 }
 
 /* ═══ CALENDLY ═══
-   kind: 'discovery' (free fit call) or 'diagnostic' ($997 session).
+   kind: 'discovery' (free fit call) or 'diagnostic' ($1,497 Empire Diagnostic).
    Each event has its own intake questions, so prefill answers are mapped per event
    (a1 on both events is monthly revenue, so it is left for the prospect to fill). ═══ */
 function getCalendlyUrl(name,email,score,leak,kind){
@@ -588,14 +634,26 @@ const el=document.getElementById('s-results');el.style.display='block';
 const cs={},cc={};ans.forEach(a=>{const q=Q[a.qi];cs[q.c]=(cs[q.c]||0)+a.s;cc[q.c]=(cc[q.c]||0)+1});
 const fs={};Object.keys(cs).forEach(k=>{fs[k]=Math.round(cs[k]/cc[k])});
 const ov=Math.round(Object.values(fs).reduce((a,b)=>a+b,0)/Object.keys(fs).length);
-const ph=gP(ov),sorted=Object.entries(fs).sort((a,b)=>a[1]-b[1]),w=sorted[0],s2=sorted[1],bm=BM[uD.rev]||BM["50-100k"];
+const ph=gP(ov),sorted=Object.entries(fs).sort((a,b)=>a[1]-b[1]),w=sorted[0],s2=sorted[1],bm=BM[uD.rev]||BM["40-60k"];
 const phaseTag=ph.l.toLowerCase().replace(' ','-');
 const primaryLeak=C[w[0]].name;
 const secondaryLeak=s2?C[s2[0]].name:'N/A';
+/* Estimated leak: admin/ops hours priced between half and all of revenue per founder hour, minus a $35/hr replacement cost. An estimate, labeled as one. */
+const RM={"under-20k":15000,"20-40k":30000,"40-60k":50000,"60-80k":70000,"80-150k":110000,"150k+":150000};
+const AH={10:35,30:25,60:15,95:5};
+const adminAns=ans.find(a=>Q[a.qi].k==='admin');
+const H=uD.hrs||50,Dsh=uD.del||0.6,Rm=RM[uD.rev]||40000;
+const A=Math.min(adminAns?AH[adminAns.s]||20:20,H);
+const revHr=Rm/(H*4.3);
+const r100=x=>Math.max(0,Math.round(x/100)*100);
+const leakLo=r100(A*Math.max(0,0.5*revHr-35)*4.3),leakHi=r100(A*Math.max(0,revHr-35)*4.3);
+const delHrs=Math.round(H*Dsh);
+const fmt=n=>'$'+n.toLocaleString('en-US');
 
 if(typeof gtag!=='undefined'){
   gtag('event','quiz_completed',{event_category:'conversion',overall_score:ov,phase:ph.l,primary_leak:primaryLeak,revenue_tier:uD.rev});
   gtag('event','generate_lead',{event_category:'conversion',value:ov});
+  gtag('event','leak_estimated',{event_category:'conversion',leak_low:leakLo,leak_high:leakHi,delivery_hours:delHrs});
 }
 
 const atPayload={'Name':uD.name,'Email':uD.email,'Revenue Tier':uD.rev,'Overall Score':ov,'Phase':ph.l,'Primary Leak':primaryLeak,'Secondary Leak':secondaryLeak,'Content Ops':fs.content||0,'Revenue Ops':fs.revenue||0,'Audience':fs.audience||0,'Team':fs.team||0,'Intelligence':fs.intelligence||0,'CEO Rhythm':fs.ceo||0,'Date Taken':new Date().toISOString(),'Source':document.referrer||'direct','Status':'New'};
@@ -619,7 +677,7 @@ el.innerHTML=`
       <circle id="sr" cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${ph.c}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${ci}" stroke-dashoffset="${ci}" class="srf"/>
     </svg>
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-      <span id="sn" style="font:600 50px/1 var(--disp);color:${ph.c}">0</span>
+      <span id="sn" style="font:400 64px/1 var(--serif);color:${ph.c}">0</span>
       <div style="width:22px;height:1px;background:var(--line);margin:8px 0 6px"></div>
       <span style="font:500 9.5px/1 var(--mono);letter-spacing:2.5px;color:var(--ink4)">OF 100</span>
     </div>
@@ -631,14 +689,22 @@ el.innerHTML=`
 
 <div class="rv" data-s="2"><div class="sep"><div class="l"></div><div class="d"></div><div class="l"></div></div></div>
 
+<div class="rv" data-s="2"><div class="p p-r" style="margin-bottom:20px;padding:28px">${cn}
+  <div class="lb lb-r">Estimated Monthly Leak</div>
+  <p style="font:400 clamp(32px,8.5vw,42px)/1.1 var(--serif);color:var(--red);margin-bottom:14px">${fmt(leakLo)} – ${fmt(leakHi)}<span style="font:400 13px/1 var(--body);color:var(--ink3)"> / month</span></p>
+  <p style="font-size:14px;line-height:1.7;color:var(--ink2);font-weight:300;margin-bottom:10px">That's the ~${A} hours a week you spend on admin and operations, priced between your take-home rate and your revenue per hour (~${fmt(Math.round(revHr))}). It's an estimate from your answers. The Empire Diagnostic calculates the exact number, and if it finds less than $5,000 a month, your fee is refunded.</p>
+  <p style="font-size:14px;line-height:1.7;color:var(--ink2);font-weight:300"><span style="font-weight:600;color:var(--ink)">Your calendar ceiling:</span> you deliver about ${delHrs} hours of client work a week yourself. Your business can't grow past those hours until delivery runs without you.</p>
+</div></div>
+
 <div class="rv" data-s="2"><div class="p" style="margin-bottom:20px">${cn}
-  <div class="lb">How You Compare</div>
+  <div class="lb">Where You Stand</div>
   <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
     <div style="display:flex;gap:28px">
-      ${[{l:"TIER AVG",v:bm.a,c:"var(--amb)"},{l:"TOP 10%",v:bm.t,c:"var(--grn)"},{l:"YOU",v:ov,c:ph.c}].map(b=>`<div><p style="font:600 9.5px/1 var(--mono);letter-spacing:2px;color:var(--ink4);margin-bottom:6px">${b.l}</p><p style="font:600 27px/1 var(--disp);color:${b.c}">${b.v}</p></div>`).join('')}
+      ${[{l:"TIER REFERENCE",v:bm.a,c:"var(--amb)"},{l:"SCALABLE BUSINESS",v:bm.t,c:"var(--grn)"},{l:"YOU",v:ov,c:ph.c}].map(b=>`<div><p style="font:600 9.5px/1 var(--mono);letter-spacing:2px;color:var(--ink4);margin-bottom:6px">${b.l}</p><p style="font:400 34px/1 var(--serif);color:${b.c}">${b.v}</p></div>`).join('')}
     </div>
-    <div style="font:700 10px/1 var(--disp);color:${ab?'var(--grn-deep)':'var(--red)'};align-self:center;letter-spacing:1px">${ab?'▲ '+(ov-bm.a)+' ABOVE AVG':'▼ '+(bm.a-ov)+' BELOW AVG'}</div>
+    <div style="font:700 10px/1 var(--disp);color:${ab?'var(--grn-deep)':'var(--red)'};align-self:center;letter-spacing:1px">${ab?'▲ '+(ov-bm.a)+' ABOVE REFERENCE':'▼ '+(bm.a-ov)+' BELOW REFERENCE'}</div>
   </div>
+  <p style="font:400 10px/1.6 var(--mono);letter-spacing:.5px;color:var(--ink4);margin-top:14px">Reference points are Empire targets for your revenue tier, not survey averages.</p>
 </div></div>
 
 <div class="rv" data-s="3"><div class="lb">Sector-by-Sector Breakdown</div>
@@ -659,7 +725,7 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 
 <div class="rv" data-s="4"><div class="p p-r" style="padding:28px">${cn}
   <div class="lb lb-r">Your Biggest Leak</div>
-  <p style="font-size:20px;font-weight:300;line-height:1.3;margin-bottom:15px;color:var(--ink)"><span style="font-weight:600">${C[w[0]].name}</span> is costing you the most.</p>
+  <p style="font:400 26px/1.2 var(--serif);margin-bottom:15px;color:var(--ink)"><span style="font-style:italic;color:var(--red)">${C[w[0]].name}</span> is costing you the most.</p>
   <p style="font-size:14px;line-height:1.75;color:var(--ink2);font-weight:300;margin-bottom:8px">Right now you're running the <span style="color:var(--red);font-weight:600">${C[w[0]].broken}</span> — ${C[w[0]].brokenDesc}.<br>The fix: shift to the <span style="color:var(--grn-deep);font-weight:600">${C[w[0]].correct}</span> — ${C[w[0]].correctDesc}.</p>
   ${s2&&s2[1]<=50?`<p style="font-size:14px;line-height:1.75;color:var(--ink2);font-weight:300">Secondary leak: <span style="color:var(--amb);font-weight:600">${C[s2[0]].name}</span> scoring ${s2[1]}/100.</p>`:''}
 </div></div>
@@ -673,7 +739,7 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
 
 <div class="rv" data-s="6"><div class="p" style="padding:44px 30px;text-align:center">${cn}
   <div class="lb" style="text-align:center">Next Step</div>
-  <p style="font-size:24px;font-weight:300;line-height:1.2;margin-bottom:12px;color:var(--ink)">Talk through your results.</p>
+  <p style="font:400 30px/1.1 var(--serif);margin-bottom:12px;color:var(--ink)">Talk through <span style="font-style:italic">your results.</span></p>
   <p style="font-size:14px;color:var(--ink3);font-weight:300;line-height:1.7;max-width:370px;margin:0 auto 28px">20-minute discovery call. We'll walk through your score, confirm where the leak is, and map which path fits you.</p>
   <a href="${calUrl}" target="_blank" class="btn" style="display:block;width:100%;padding:20px 12px;text-decoration:none;font-size:clamp(9px,2.7vw,10.5px);letter-spacing:2.6px;white-space:nowrap" onclick="if(typeof gtag!=='undefined')gtag('event','discovery_call_clicked',{event_category:'conversion',overall_score:${ov}})">BOOK YOUR DISCOVERY CALL</a>
   <p style="font:600 10px/1.6 var(--mono);color:var(--gold);margin-top:20px;letter-spacing:2px">FREE · 20 MIN · NO OBLIGATION</p>
@@ -683,19 +749,21 @@ ${sorted.map(([k,sc],i)=>{const cm=C[k],iw=i===0,cl=gC(sc);return`<div class="cr
       <div class="step">
         <div class="step-n">01</div>
         <div>
-          <div class="step-h">Diagnostic Session <span>· $997</span></div>
+          <div class="step-h">Empire Diagnostic <span>· $1,497</span></div>
           <div class="step-tag">Where every engagement starts</div>
-          <p>75 minutes live. We put a real dollar figure on your leaks, and you get a written Empire Action Map within 48 hours.</p>
+          <p>AI can list what might be wrong. The Diagnostic prices it: 75 minutes live on your real numbers, a dollar figure on every leak, and a written Empire Action Map within 48 hours.</p>
+          <p class="step-note">Leak Guarantee: if we don't find at least $5,000 a month in recoverable profit, your $1,497 is refunded in full.</p>
         </div>
       </div>
-      <a href="${diagUrl}" target="_blank" class="btn btn-w" style="display:block;width:100%;padding:17px 12px;margin:2px 0 26px;text-align:center;text-decoration:none;font-size:clamp(9px,2.6vw,10px);letter-spacing:2.4px;white-space:nowrap" onclick="if(typeof gtag!=='undefined')gtag('event','diagnostic_session_clicked',{event_category:'conversion',overall_score:${ov}})">BOOK THE $997 DIAGNOSTIC</a>
+      <a href="${diagUrl}" target="_blank" class="btn btn-w" style="display:block;width:100%;padding:17px 12px;margin:2px 0 26px;text-align:center;text-decoration:none;font-size:clamp(9px,2.6vw,10px);letter-spacing:2.4px;white-space:nowrap" onclick="if(typeof gtag!=='undefined')gtag('event','diagnostic_session_clicked',{event_category:'conversion',overall_score:${ov}})">BOOK THE $1,497 DIAGNOSTIC</a>
       <div class="step">
         <div class="step-n">02</div>
         <div>
-          <div class="step-h">Empire Implementation Program <span>· $4,997</span></div>
+          <div class="step-h">Empire Implementation Program <span>· $7,497</span></div>
           <div class="step-tag">Built from your Action Map</div>
-          <p>We build the systems that fix your primary and secondary leaks: three working sessions over 4–6 weeks, 30 days of direct support, and a Day 45 reassessment against your Day 1 baseline.</p>
-          <p class="step-note">Your $997 is credited in full if you continue within 14 days.</p>
+          <p>We build the systems that fix your primary and secondary leaks, including 2–3 live AI agents that draft your proposals, run onboarding, recap calls, and brief you every Monday. You approve everything. Three working sessions over 4–6 weeks, 30 days of direct support, and a Day 45 reassessment against your Day 1 baseline.</p>
+          <p class="step-note">Your $1,497 is credited in full if you continue within 14 days.</p>
+          <p style="margin-top:10px;font-size:12.5px;color:var(--ink3)">After Day 45, optional Agent Care ($997/mo): a Leak Log every Monday that flags new leaks in dollars before they compound.</p>
         </div>
       </div>
     </div>
