@@ -614,13 +614,28 @@ async function submitLead(lead, email, name, tags) {
   }
 }
 
+/* ═══ SOURCE TRACKING — reads utm tags from the link the visitor arrived on (kept for the session) ═══ */
+const CHANNELS={linkedin:'LinkedIn',lnkd:'LinkedIn',youtube:'YouTube',yt:'YouTube',kit:'Email',email:'Email',newsletter:'Email',google:'Google',bing:'Search',duckduckgo:'Search',chatgpt:'AI Search',openai:'AI Search',perplexity:'AI Search',claude:'AI Search',gemini:'AI Search',copilot:'AI Search',instagram:'Instagram',ig:'Instagram',facebook:'Facebook',fb:'Facebook',x:'X',twitter:'X',tiktok:'TikTok',reddit:'Reddit',podcast:'Podcast',referral:'Referral',partner:'Referral',dm:'LinkedIn'};
+const REFS=[['linkedin.','LinkedIn'],['lnkd.in','LinkedIn'],['youtube.','YouTube'],['youtu.be','YouTube'],['google.','Google'],['bing.','Search'],['duckduckgo.','Search'],['chatgpt.','AI Search'],['openai.','AI Search'],['perplexity.','AI Search'],['claude.ai','AI Search'],['gemini.google','AI Search'],['copilot.microsoft','AI Search'],['instagram.','Instagram'],['facebook.','Facebook'],['fb.','Facebook'],['t.co','X'],['twitter.','X'],['x.com','X'],['tiktok.','TikTok'],['reddit.','Reddit'],['mail.','Email'],['outlook.','Email'],['kit.com','Email'],['convertkit','Email'],['calendly.','Referral']];
+function getSource(){let saved={};try{saved=JSON.parse(sessionStorage.getItem('eos_src')||'{}')}catch(e){}
+  if(saved.channel)return saved;
+  const q=new URLSearchParams(location.search),s=(q.get('utm_source')||q.get('ref')||q.get('source')||'').toLowerCase(),c=q.get('utm_campaign')||'',m=(q.get('utm_medium')||'').toLowerCase();
+  let channel='';
+  if(s){const k=Object.keys(CHANNELS).find(k=>s===k||s.startsWith(k));channel=k?CHANNELS[k]:s.charAt(0).toUpperCase()+s.slice(1)}
+  else if(q.get('gclid'))channel='Google';else if(q.get('fbclid'))channel='Facebook';else if(q.get('li_fat_id'))channel='LinkedIn';
+  let ref='';try{ref=document.referrer?new URL(document.referrer).hostname.toLowerCase():''}catch(e){}
+  if(!channel&&ref&&!ref.includes('creatorempirediagnostic')){const hit=REFS.find(([d])=>ref.includes(d));channel=hit?hit[1]:'Referral'}
+  if(!channel)channel='Direct';
+  const out={channel,campaign:c,medium:m,ref};try{sessionStorage.setItem('eos_src',JSON.stringify(out))}catch(e){}return out}
+try{getSource()}catch(e){}
+
 /* ═══ CALENDLY ═══
    kind: 'discovery' (free fit call) or 'diagnostic' ($1,497 Empire Diagnostic).
    Each event has its own intake questions, so prefill answers are mapped per event
    (a1 on both events is monthly revenue, so it is left for the prospect to fill). ═══ */
 function getCalendlyUrl(name,email,score,leak,kind){
   const base=kind==='diagnostic'?CONFIG.diagnostic:CONFIG.calendly;
-  const params=new URLSearchParams({name,email,utm_source:'empire_assessment',utm_medium:kind==='diagnostic'?'diagnostic':'discovery',utm_campaign:'launch'});
+  const _s=getSource();const params=new URLSearchParams({name,email,utm_source:'empire_assessment',utm_medium:kind==='diagnostic'?'diagnostic':'discovery',utm_campaign:_s.campaign||'launch',utm_content:(_s.channel||'Direct').toLowerCase().replace(/[^a-z0-9]+/g,'-')});
   if(kind==='diagnostic'){params.set('a2',`Primary leak: ${leak}`);params.set('a3',`${score}`)}
   else{params.set('a2',`Assessment score ${score}. Primary leak: ${leak}`)}
   return `${base}?${params.toString()}`
@@ -658,7 +673,9 @@ if(typeof gtag!=='undefined'){
 
 const atPayload={'Name':uD.name,'Email':uD.email,'Revenue Tier':uD.rev,'Overall Score':ov,'Phase':ph.l,'Primary Leak':primaryLeak,'Secondary Leak':secondaryLeak,'Content Ops':fs.content||0,'Revenue Ops':fs.revenue||0,'Audience':fs.audience||0,'Team':fs.team||0,'Intelligence':fs.intelligence||0,'CEO Rhythm':fs.ceo||0,'Date Taken':new Date().toISOString(),'Source':document.referrer||'direct','Status':'New'};
 if(uD.social)atPayload['Social']=uD.social;
-submitLead(atPayload,uD.email,uD.name,[phaseTag,`rev-${uD.rev}`,`leak-${w[0]}`]);
+const src=getSource();if(src.channel)atPayload['Channel']=src.channel;if(src.campaign||src.medium)atPayload['Campaign']=[src.campaign,src.medium].filter(Boolean).join(' / ');if(src.ref)atPayload['Source']=src.ref;
+const tagList=[phaseTag,`rev-${uD.rev}`,`leak-${w[0]}`];if(src.channel)tagList.push(`src-${src.channel.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`);if(src.campaign)tagList.push(`camp-${src.campaign.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`);
+submitLead(atPayload,uD.email,uD.name,tagList);
 
 const calUrl=getCalendlyUrl(uD.name,uD.email,ov,primaryLeak,'discovery');
 const diagUrl=getCalendlyUrl(uD.name,uD.email,ov,primaryLeak,'diagnostic');
